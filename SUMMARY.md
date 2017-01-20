@@ -2,8 +2,8 @@
 
 * [Introduction](README.md)
 * [完成品の動作確認](products_confirmation.md)
-  * [スライダの起動](start_slider.md)
-  * [モニタの確認](chapter1.md)
+  * [端末の起動](start_slider.md)
+  * [サーバの確認](chapter1.md)
 * [RPi 入門](chapter2.md)
   * [PCとの接続](chapter2.md)
     * [TCP/IP](chapter2.md)
