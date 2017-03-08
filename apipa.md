@@ -1,4 +1,7 @@
-# LANケーブルでAPIPA接続
+# LANケーブルで直結
+
+##<u>目的</u>
+
 
 ##<u>実習手順</u>
 
@@ -6,6 +9,10 @@
 1. LAN ケーブルで PC と Raspberry Pi を直結する
 
 <img src="pic/ss.2016-12-16 14.43.45.png" width="75%">
+RPi に 169.254.x.y の IP アドレスが割り当てられる
+
+slider のプログラムによって毎分 30秒頃、割当られた IP アドレスが表示されるので、メモを取る  
+（スマフォで写真を取るなどの方法も有効）
 
 2. PC でターミナルを開き、ssh で接続
 
@@ -15,19 +22,14 @@
 
 パスワードを入力してログインする
 
-3. IP アドレスを直接指定してもログインできる
-slider は APIPA で割り当てられた IP アドレスを表示する
-<img src="pic/ss.2016-12-16 14.43.45.png" width="75%">
-
-表示された IP アドレスを利用して
+3. Mac, Linux, Windows10, もしくは 古い Windows であっても bonjour protocol がインストールしてあれば、下記のように ホスト名.local で接続することができる
 
 ```bash:
-  ssh pi@IPアドレス
+  ssh pi@ホスト名.local
 ```
-でログインできる
-### Remote Desktop でログイン
 
-### FTP でログイン
+### Remote Desktop でログイン
+同様に、Remoto Desktop でも利用することができる
 
 ##<u>ポイント解説</u>
 1. Raspberry Pi の Eathernet Port は LAN ケーブルのストレート/クロスを認識して自動的に切り替える **Auto-MDIX** を備えているのでケーブルはストレートでもクロスでもどちらでもかまわない
