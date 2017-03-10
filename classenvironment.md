@@ -9,7 +9,7 @@ PSK:  raspberry
 
 |ホスト名|IP アドレス|備考|
 |:--:|:--:|:--:|
-|gc16router|173.24.1.1|Router|
+|gc16router|172.24.1.1|Router|
 |gc1601|172.24.1.51|Server|
 |gc1602|172.24.1.52|Client|
 |gc1603|172.24.1.53|Client|
