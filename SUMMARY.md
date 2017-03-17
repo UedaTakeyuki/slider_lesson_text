@@ -7,7 +7,7 @@
   * [2.Raspberry Pi への接続](chapter2.md)
     * [ネットワークを介したlogin](network.md)
     * [LANケーブルで直結](apipa.md)
-  * [Raspbeery Piの操作（任意）](console.md)
+  * [Linux の基本操作（任意）](console.md)
     * [リモートディスクトップ](chapter2.md)
     * [Win32-OpenSSH](chapter2.md)
     * [FileZilla](chapter2.md)
