@@ -51,5 +51,6 @@ man parted
 で使い方を確認し、起動中の SD カードの情報を確認し、Jessie Lite の SD カードのパーティションを操作してみる
 
 
+
 ##<u>ポイント解説</u>
 1. 因に、gparted の "g" は Gnome の G
