@@ -1,4 +1,4 @@
-# Linux の基本操作（任意）
+# 設定メニュー
 
 ##<u>概要</u>
 コマンドラインで login した後の作業は基本的に下記の３点になる
@@ -29,6 +29,38 @@ pi@gc1624:~ $ pwd
 drwxrwxr-x  5 root pi      1024 Feb 27 21:55 SCRIPT
 -rw-r--r--  1 pi   pi       951 Nov 22 21:59 ssd1306.py
 ```
+
+詳細情報の意味は先頭ブロックから順番に以下
+
+|位置|意味|
+|:--:|:--:|
+|ファイルの権限|詳細は以下|
+|ファイルのハードリンク数|ファイルシステム内で、リンクされている数。Linux ではファイルは複数箇所からリンクできる|
+|所有者のid|ファイルを操作するユーザがこのidをもつ時、下記の権限で所有者の権限が付与される|
+|グループのid|ファイルを操作するユーザがこのidを持つ時、下記の権限でグループの権限が付与される|
+|サイズ|ファイルのサイズ|
+|更新日|ファイルの更新日|
+|ファイル名|ファイルの名前|
+
+
+
+先頭の `drwxrwxr-x` や `-rw-r--r--` 等の権限の意味は以下  
+
+|位置|権限|意味|
+|:--:|:--:|:--:|
+|1文字目|ファイルの種類|d:ディレクトリ、-:通常のファイル|
+|2文字目|オーナーの読み取り権限|r:読み取り可、-:読み取り不可|
+|3文字目|オーナーの書き込み権限|w:書込み可、-:書込み不可|
+|4文字目|オーナーの実行権限|x:実行可、-:実行不可|
+|5文字目|グループの読み取り権限|r:読み取り可、-:読み取り不可|
+|6文字目|グループの書き込み権限|w:書込み可、-:書込み不可|
+|7文字目|グループの実行権限|x:実行可、-:実行不可|
+|8文字目|一般ユーザーの読み取り権限|r:読み取り可、-:読み取り不可|
+|9文字目|一般ユーザーの書き込み権限|w:書込み可、-:書込み不可|
+|10文字目|一般ユーザーの実行権限|x:実行可、-:実行不可|
+
+権限は、オーナー、グループ、一般ユーザーの or で付与される。例えば `pi` アカウントでログインしている場合、上記、`ssd1306.py` によって `pi` は所有者でありかつ所属グループである。ファイルの書き込み権限はオーナとしては書き込み可(1)、グループとしては不可(0)なので、or を取って書き込み可(1)の権限が付与される
+
 SCRIPT の先頭の `drwxrwxr-x`で、d は SCRIPT がフォルダ（ディレクトリファイル）であることを示す。以下は３文字づつ所有者の権限(rwx)、グループの権限、(rwx)、その他ユーザの権限(r-x)を表す
 
 3. ディレクトリを SCRIPT の中に移動し、ファイルの一覧を見る
@@ -84,6 +116,13 @@ nano a.txt
 <img src="pic/ss.2017-03-17 21.41.56.png" width="75%">
 ここで別のファイル名を入力すると別名で保存される
 
+### ファイルの簡単な作成
+echo コマンドで文字列を表示できる。表示先をファイル名にリダイレクトするとファイルに保存される
+
+1. `echo abc` と入力。abc と表示される
+2. `echo abc > c.txt` と入力。なにも表示されない
+3. `ls` c.txt が作成されている
+
 ### ファイルの編集
 先ほど作成した a.txt ファイルを再度開く
 ```
@@ -104,3 +143,33 @@ nano a.txt
 
 ### ファイルの削除
 `rm a.txt b.txt` で、ファイルa.txt と b.txt 削除
+
+### sudo
+`sudo` の名の由来は `substitute user do` だが、よく`superuser do`と呼ばれるとおり、コマンドをスーパーユーザーの権限で実行する。sudo は許可されたユーザーのみが使うことができ、`pi`ユーザは`sudo`を許可されている
+
+1. `cd /boot` で boot ディレクトリに移動
+```
+pi@gc1624:~ $ cd /boot
+pi@gc1624:/boot $
+```
+2. `echo abc > c.txt` を実行しても、権限がないためコマンドの実行を拒否される
+```
+pi@gc1624:/boot $ echo abc > c.txt
+-bash: c.txt: Permission denied
+```
+3. `sudo sh -c 'echo abc > c.txt'` を実行。c.txt ファイルが作成される
+```
+pi@gc1624:/boot $ sudo sh -c 'echo abc > c.txt'
+pi@gc1624:/boot $ ls
+bcm2708-rpi-b.dtb       COPYING.linux       FSCK0001.REC      LICENSE.oracle
+bcm2708-rpi-b-plus.dtb  crontab.slider.txt  gc_cid            overlays
+bcm2708-rpi-cm.dtb      c.txt               gc.ini            sc.txt
+bcm2709-rpi-2-b.dtb     DATA                gc_issue.txt      sliders.tiff
+bcm2710-rpi-3-b.dtb     fixup_cd.dat        gc_log.txt        start_cd.elf
+bcm2710-rpi-cm3.dtb     fixup.dat           issue.txt         start_db.elf
+bootcode.bin            fixup_db.dat        kernel7.img       start.elf
+cmdline.txt             fixup_x.dat         kernel.img        start_x.elf
+config.txt              FSCK0000.REC        LICENCE.broadcom
+pi@gc1624:/boot $ sudo rm c.txt
+```
+`sudo echo abc > c.txt` としなかったのは、sudo がリダイレクトの先までに及ばないため、sh コマンドで別の shell を起こし、その全体に sudo を適用した。

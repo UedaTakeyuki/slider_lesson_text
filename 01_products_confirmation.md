@@ -35,7 +35,7 @@ Raspberry Pi には起動スイッチ等はない。Micro USB や GPIO を通じ
 slider の Web アプリケーションを使って PC の時刻で Raspberr Pi の時刻を補正する
 
 1. PC で chrome を開き、IP アドレスを指定して自分の Raspberry Pi に接続する。IPアドレスは[こちら](classenvironment.md)で確認できる。以下の画面になる
-<img src="pic/ss.2016-12-16 14.43.45.png" width="75%">
+<img src="pic/ss.2017-03-08 21.01.34.png" width="75%">
 
 2. Set DateTime を開く。真っ白な画面が開くのと同時に Raspberry Pi の LCD の時刻が PC の時刻と同期する
 

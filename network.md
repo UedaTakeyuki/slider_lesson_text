@@ -16,10 +16,32 @@ PC と Raspberry Pi を同じネットワーク内に参加させてネットワ
 
 ### デスクトップで操作(GUI)
 1. GUI操作用の ***gc15*** の SD カードで Raspberry Pi を起動する
-2. PC で RemoteDesktop を開き、上で調べた IP アドレスで自分の Raspberry Pi に login する。login id と password は以下
+2. PC で RemoteDesktop を開きく、上で調べた IP アドレスで自分の Raspberry Pi に接続
+3. 下記のように login 画面が開く
+<img src="pic/ss.2016-12-16 14.44.02.png" width="75%">
+login id と password は以下
 
   - ID: pi
   - PW: gc15pw
+
+login すると、以下のようなデスクトップが開く
+<img src="pic/ss.2016-12-16 14.44.26.png" width="75%">
+
+###（任意）RemoteDesktop でのコマンドライン接続
+デスクトップを持たない ***gc16*** にも RemoteDesktop で接続することができ、terminal アプリケーションの代用にすることができる
+
+1. GUI操作用の ***gc16*** の SD カードで Raspberry Pi を起動する
+2. PC で RemoteDesktop を開きく、上で調べた IP アドレスで自分の Raspberry Pi に接続
+3. 下記のように login 画面が開く
+<img src="pic/ss.2016-12-16 14.44.02.png" width="75%">
+login id と password は以下
+
+  - ID: pi
+  - PW: gc16pw
+
+login すると、以下のようなコンソール画面になる
+<img src="pic/ss.2016-12-16 14.44.14.png" width="75%">
+
 
 ### shell in a box の利用(CUI)
 gc15, gc16 では shell in a box がインストールしてあり、Web ブラウザ経由で tty にログインすることができる。多くのクラウドサービスの Web ログインと同じようにつかうことができる
