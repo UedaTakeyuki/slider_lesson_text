@@ -85,6 +85,12 @@ pi@gc1624:~ $ ls -l /dev
 pi@gc1624:~ $ ls -l /etc
 ```
 
+### home フォルダ
+ユーザーのホームディレクトリ
+```
+pi@gc1624:~ $ ls -l /home
+```
+
 ### sys フォルダ
 sysfs, kernel のデータを user land に export する仮想ファイルシステム
 ```
@@ -92,13 +98,10 @@ pi@gc1624:~ $ ls -l /sys
 ```
 
 たとえば、SD カードの cid は
-`cat /sys/block/mmcblk0/device/cid` で簡単に参照できる
+`cat /sys/block/mmcblk0/device/cid`
 
-### home フォルダ
-ユーザーのホームディレクトリ
-```
-pi@gc1624:~ $ ls -l /home
-```
+CPU温度は
+`cat /sys/class/thermal/thermal_zone0/temp`
 
 ### tmp フォルダ
 仮ファイルの置き場
