@@ -1,12 +1,13 @@
 # Introduction
 
+## Objective.
 このドキュメントは講座 `IoT基礎` の実習テキストです。`IoT基礎` では、Raspberry Pi と、Atelier UEDA が著作権をもつアプリケーション [slider](https://github.com/UedaTakeyuki/slider)、[monitor](https://github.com/UedaTakeyuki/monitor)、[BackupPi_2](https://github.com/UedaTakeyuki/BackupPi_2)、などのオープンソースのプロダクトを利用して IoT システムの仕組みを理解するとともに Raspberry Pi をつかって情報システムのプロトタイプを作るためのノウハウを学びます  
 
 
-# The body of this documents.
+## The body of this documents.
 ドキュメントの本体は[こちら](SUMMARY.md)になります  
 
-# How to make a PDF contents of this documents.
+## How to make a PDF contents of this documents.
 
 このドキュメントは以下の手順で gitbook をつかって PDF に変換することができます  
 
