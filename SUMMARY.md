@@ -1,6 +1,6 @@
 # Summary
-
-* [Introduction](README.md)
+* [READEME](READEME.md)
+* [Introduction](chapter1.md)
   * [教室の環境](classenvironment.md)
   * [1. 完成品の動作確認](01_products_confirmation.md)
 * [RPi 入門](chapter2.md)
