@@ -1,1 +1,1 @@
-# Raspberry Pi のバージョンチェック
+# 18.Raspberry Pi のバージョンチェック

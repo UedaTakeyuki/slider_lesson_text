@@ -1,4 +1,4 @@
-# GPIO
+# 13.GPIO
 
 ##<u>目的</u>
 GPIOの操作について習得する。Linux では gpio は /sys から shell で操作することができるのだが、Python 等の言語環境から利用する便利なライブラリも多数用意されているので、好きな物を使えばよいのだが、Raspberry Pi に特化したライブラリとして `Wiring Pi` も便利

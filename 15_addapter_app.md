@@ -1,2 +1,1 @@
-# chapter2
-# Raspberry Pi 入門
+# 15.センサを読むソフトウェア

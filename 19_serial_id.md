@@ -1,2 +1,1 @@
-# chapter2
-# Raspberry Pi 入門
+# 19.Raspberry Pi の Serial ID の確認
