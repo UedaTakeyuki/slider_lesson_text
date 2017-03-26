@@ -48,9 +48,9 @@ sleep 1
 echo 0 > /sys/class/leds/led0/brightness
 ```
 nano エディタの場合　`CTL+x`　で下記のように保存する確認してくるので `y`  
-<img src="pic/ss.2017-03-22 22.03.30.png" width="75%">
+<img src="pic/ss.2017-03-22 22.03.30.png" width="75%">  
 さらに、ファイル名を確認してくるので、そのままでよければ `enter`  
-<img src="pic/ss.2017-03-22 22.04.52.png" width="75%">
+<img src="pic/ss.2017-03-22 22.04.52.png" width="75%">  
 `ls` で、led.sh が出来ていることを確認
 
 3. 実行権限の付与  
