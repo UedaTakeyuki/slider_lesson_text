@@ -18,11 +18,9 @@ pi@gc1624:~ $ cat /sys/class/leds/led0/trigger
 ```
 
 2. `/sys/class/leds/led0/trigger` に `none` と書いてトリガーをなくす
-
 ```
 pi@gc1624:~ $ sudo sh -c "echo none > /sys/class/leds/led0/trigger"
 ```
-
 緑の led は消灯する
 
 3. led の on
@@ -31,7 +29,6 @@ sudo sh -c "echo 1 > /sys/class/leds/led0/brightness"
 ```
 
 4. led の off
-
 ```
 sudo sh -c "echo 0 > /sys/class/leds/led0/brightness"
 ```
@@ -50,16 +47,13 @@ echo 1 > /sys/class/leds/led0/brightness
 sleep 1
 echo 0 > /sys/class/leds/led0/brightness
 ```
-
 nano エディタの場合　`CTL+x`　で下記のように保存する確認してくるので `y`  
 <img src="pic/ss.2017-03-22 22.03.30.png" width="75%">
-
 さらに、ファイル名を確認してくるので、そのままでよければ `enter`  
 <img src="pic/ss.2017-03-22 22.04.52.png" width="75%">
-
 `ls` で、led.sh が出来ていることを確認
 
-3. 実行権限の付与
+3. 実行権限の付与  
 `chmod a+x led.sh`
 
 4. root 権限で実行  
@@ -97,7 +91,6 @@ Type "help", "copyright", "credits" or "license" for more information.
 ```
 
 5. 点灯、消灯、短く点滅、長く点滅を試す
-
 ```
 >>> l.on(0)
 >>> l.off(0)
@@ -131,7 +124,6 @@ while True:
 ```
 
 3. morse_code.py を実行する
-
 ```
 pi@gc1624:~ $ python morse_code.py
   File "morse_code.py", line 7
@@ -139,10 +131,7 @@ pi@gc1624:~ $ python morse_code.py
     ^
 IndentationError: unexpected indent
 ```
-
 このようにエラーになる。python では `字下げ` が単なる字句ではなく制御ブロックを表すので、字下げのレベルがおかしいと構文エラーを報告する。再度、morse_code.py をエディタで開き、字下げを合わせる
-
-
 ```
 import led
 import time
@@ -156,7 +145,6 @@ while True:
   l.S(0)
   time.sleep(3)
 ```
-
 これを実行すると、RPi の緑の LED が SOS を発信し続ける。`CNTL+Z`で終了する
 
 
@@ -165,7 +153,6 @@ Tensor Flow のサンプルプログラムを実行する
 Google の TF のページのサンプルプログラム程度であれば Raspberry Pi で十分に動作する
 
 1. 以下は、Google の　TF のページのサンプルプログラムを少し修正した（本家のサンプルプログラムは実は今の TF とバージョンがあっておらず、そのままでは動かない）ものである
-
 ```
 pi@gc1624:~ $ cat -n /home/pi/tf.py
      1	import tensorflow as tf
@@ -203,11 +190,9 @@ pi@gc1624:~ $ cat -n /home/pi/tf.py
     33
     34	# Learns best fit is W: [0.1], b: [0.3]
     ```
-
 ランダムな 100個 の x と、y = 0.1x + 0.3 の組を教師として、直線の傾きと原点を予測するというすこし自明な問題
 
 2. 実行してみる
-
 ```
 pi@gc1624:~ $ python /home/pi/tf.py
 (0, array([ 0.10128424], dtype=float32), array([ 0.39288887], dtype=float32))
@@ -222,7 +207,6 @@ pi@gc1624:~ $ python /home/pi/tf.py
 (180, array([ 0.09999949], dtype=float32), array([ 0.30000028], dtype=float32))
 (200, array([ 0.09999985], dtype=float32), array([ 0.3000001], dtype=float32))
 ```
-
 少し時間がかかるが、正解に収束していくのが見える
 
 3. RPi への Tensor Flow ライブラリのインストールスクリプトは以下

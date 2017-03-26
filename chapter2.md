@@ -1,1 +1,1 @@
-# Raspberry Pi の Serial ID の確認
+# RPi 入門
