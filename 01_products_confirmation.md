@@ -34,7 +34,8 @@ Raspberry Pi には起動スイッチ等はない。Micro USB や GPIO を通じ
 ### 時刻の設定
 slider の Web アプリケーションを使って PC の時刻で Raspberr Pi の時刻を補正する
 
-1. PC で chrome を開き、IP アドレスを指定して自分の Raspberry Pi に接続する。IPアドレスは[こちら](classenvironment.md)で確認できる。以下の画面になる
+1. PC で chrome を開き、IP アドレスを指定して自分の Raspberry Pi に接続する。IPアドレスは[こちら](classenvironment.md)で確認できる。以下の画面になる  
+
 <img src="pic/ss.2017-03-08 21.01.34.png" width="75%">
 
 2. Set DateTime を開く。真っ白な画面が開くのと同時に Raspberry Pi の LCD の時刻が PC の時刻と同期する
@@ -42,12 +43,12 @@ slider の Web アプリケーションを使って PC の時刻で Raspberr Pi 
 3. (任意：時刻が同期される理由の確認) chrome の「検証」を開き、Source タブで "dt.php" のコードを開く。このコードは Ajax でクライアントの時刻をサーバに POST している。
 
 ### サーバの確認
-1. PC で chrome を開き、IP アドレスを指定して自分の Raspberry Pi が所属するネットワークのサーバーに接続する。サーバーの IP アドレスは[こちら](classenvironment.md)で確認できる。以下の画面になる
+1. PC で chrome を開き、IP アドレスを指定して自分の Raspberry Pi が所属するネットワークのサーバーに接続する。サーバーの IP アドレスは[こちら](classenvironment.md)で確認できる。以下の画面になる  
 
 <img src="pic/ss.2017-03-08 21.06.35.png" width="75%">
 
 2. monitor 配下の自分の Raspberry Pi のホスト名をクリック   
-下記のログイン画面が開く
+下記のログイン画面が開く  
 
 <img src="pic/ss.2017-03-08 21.06.47.png" width="75%">
 
@@ -56,7 +57,7 @@ slider の Web アプリケーションを使って PC の時刻で Raspberr Pi 
 - ID: g4
 - PW: g4
 
-3. ログインすると自分の Raspberry Pi のデータを表示するページが開く
+3. ログインすると自分の Raspberry Pi のデータを表示するページが開く  
 
 <img src="pic/ss.2017-03-08 21.07.06.png" width="75%">
 
