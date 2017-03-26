@@ -1,4 +1,4 @@
-# 4.Folder Structure
+# 11.Folder Structure
 
 ##<u>概要</u>
 ３章で理由を説明するが、Raspbian を含め、Raspberry Pi の OS として利用される SDカードは一般に複数の（最低２つの）パーティションから構成され、/ 配下にマウントされて利用される
