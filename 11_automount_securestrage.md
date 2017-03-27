@@ -1,197 +1,212 @@
 # 11.外部ストレージの auto mount とセキュアストレージ
 
 ##<u>概要</u>
-３章で理由を説明するが、Raspbian を含め、Raspberry Pi の OS として利用される SDカードは一般に複数の（最低２つの）パーティションから構成され、/ 配下にマウントされて利用される
-マウントには /etc/fstab による静的な方法、udeb による auto mount、mount コマンドによる手動マウントなどの方法がある
+`/` にマウントされるストレージは`/etc/fstab`によって起動時にマウントされるストレージの他に、USB に新たにストレージが装着されたことを認識して自動的にマウントする `auto mount`がある  
+また、セキュアストレージの復号化とマウントを静的におこなってしまうと、その定義ファイルからストレージの暗号鍵がわかってしまうので、それをさけるために`手動でマウント`する方法もある
+
+gc15 と gc16 では、auto mount のマウント先が異なる。gc15 が利用するデスクトップタイプの Raspbian Jessie と gc16 が利用するコマンドラインベースの Raspbian Jessie Lite では auto mount の方法が異なるからである
 
 ##<u>実習手順</u>
-jessie lite の SD カードを挿した SD カード R/W を Raspberry Pi の USB ポートに装着して、自身の gc16 に terminal でログインする
 
-### ディレクトリの移動 と一覧の表示
-1. `ls -l /` コマンドで、ルート配下のファイル一覧を確認
+### gc16 の auto mount
+SD カード R/W を Raspberry Pi の USB ポートに装着 ***せずに***、自身の gc16 に terminal でログインする
 
+1.
 ```
-pi@gc1624:~ $ ls -l /
-total 84
-drwxr-xr-x   2 root root  4096 Jan  9 10:28 bin
-drwxr-xr-x   7 root root 16384 Jan  1  1970 boot
-drwxr-xr-x  15 root root  3580 Mar 17 16:17 dev
-drwxr-xr-x 101 root root  4096 Feb 27 21:53 etc
-drwxr-xr-x   3 root root  4096 Sep 23 11:26 home
-drwxr-xr-x  19 root root  4096 Jan  9 10:27 lib
-drwx------   2 root root 16384 Sep 23 12:52 lost+found
-drwxr-xr-x  10 root root  4096 Jan  9 10:29 media
-drwxr-xr-x   2 root root  4096 Sep 23 11:20 mnt
-drwxr-xr-x   3 root root  4096 Sep 23 11:27 opt
-dr-xr-xr-x 180 root root     0 Jan  1  1970 proc
-drwx------   4 root root  4096 Jan 17 08:55 root
-drwxr-xr-x  22 root root   880 Mar 17 16:18 run
-drwxr-xr-x   2 root root  4096 Jan  9 10:28 sbin
-drwxr-xr-x   2 root root  4096 Sep 23 11:20 srv
-dr-xr-xr-x  12 root root     0 Jan  1  1970 sys
-drwxrwxrwt   8 root root  4096 Mar 17 19:23 tmp
-drwxr-xr-x  10 root root  4096 Sep 23 11:20 usr
-drwxr-xr-x  12 root root  4096 Oct 15 19:22 var
+pi@gc1624:~ $ lsusb
+Bus 001 Device 005: ID 056e:7007 Elecom Co., Ltd
+Bus 001 Device 003: ID 0424:ec00 Standard Microsystems Corp. SMSC9512/9514 Fast Ethernet Adapter
+Bus 001 Device 002: ID 0424:9514 Standard Microsystems Corp.
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 ```
 
-### boot フォルダ
-boot フォルダの中身を確認する
-
+2.
 ```
-pi@gc1624:~ $ ls -l /boot
-```
-
-Linux のブートに必要となるファイルがここに格納されている
-
-現在、作業しているディレクトリは `pi` で、ディレクトリツリーの頂点(`/`ルート)から `pi` までの pass は `/home/pi` になる  
-
-
-2. `ls` コマンドで、現在のディレクトリ配下のファイルの一覧の表示。`ls -l`で、詳細情報付きで表示
-```
-drwxrwxr-x  5 root pi      1024 Feb 27 21:55 SCRIPT
--rw-r--r--  1 pi   pi       951 Nov 22 21:59 ssd1306.py
+pi@gc1624:~ $ df
+Filesystem     1K-blocks    Used Available Use% Mounted on
+/dev/root        3404364 2662352    580380  83% /
+devtmpfs          469536       0    469536   0% /dev
+tmpfs             473868       0    473868   0% /dev/shm
+tmpfs             473868    6400    467468   2% /run
+tmpfs               5120       4      5116   1% /run/lock
+tmpfs             473868       0    473868   0% /sys/fs/cgroup
+/dev/mmcblk0p1   3507840  418864   3088976  12% /boot
+/dev/mapper/i3    247791   78426    152265  34% /home/pi/SCRIPT
+/dev/mapper/i4    247791  103988    126703  46% /var/www/html/SCRIPT
 ```
 
-詳細情報の意味は先頭ブロックから順番に以下
-
-|位置|意味|
-|:--:|:--:|
-|ファイルの権限|詳細は以下|
-|ファイルのハードリンク数|ファイルシステム内で、リンクされている数。Linux ではファイルは複数箇所からリンクできる|
-|所有者のid|ファイルを操作するユーザがこのidをもつ時、下記の権限で所有者の権限が付与される|
-|グループのid|ファイルを操作するユーザがこのidを持つ時、下記の権限でグループの権限が付与される|
-|サイズ|ファイルのサイズ|
-|更新日|ファイルの更新日|
-|ファイル名|ファイルの名前|
-
-
-
-先頭の `drwxrwxr-x` や `-rw-r--r--` 等の権限の意味は以下  
-
-|位置|権限|意味|
-|:--:|:--:|:--:|
-|1文字目|ファイルの種類|d:ディレクトリ、-:通常のファイル|
-|2文字目|オーナーの読み取り権限|r:読み取り可、-:読み取り不可|
-|3文字目|オーナーの書き込み権限|w:書込み可、-:書込み不可|
-|4文字目|オーナーの実行権限|x:実行可、-:実行不可|
-|5文字目|グループの読み取り権限|r:読み取り可、-:読み取り不可|
-|6文字目|グループの書き込み権限|w:書込み可、-:書込み不可|
-|7文字目|グループの実行権限|x:実行可、-:実行不可|
-|8文字目|一般ユーザーの読み取り権限|r:読み取り可、-:読み取り不可|
-|9文字目|一般ユーザーの書き込み権限|w:書込み可、-:書込み不可|
-|10文字目|一般ユーザーの実行権限|x:実行可、-:実行不可|
-
-権限は、オーナー、グループ、一般ユーザーの or で付与される。例えば `pi` アカウントでログインしている場合、上記、`ssd1306.py` によって `pi` は所有者でありかつ所属グループである。ファイルの書き込み権限はオーナとしては書き込み可(1)、グループとしては不可(0)なので、or を取って書き込み可(1)の権限が付与される
-
-SCRIPT の先頭の `drwxrwxr-x`で、d は SCRIPT がフォルダ（ディレクトリファイル）であることを示す。以下は３文字づつ所有者の権限(rwx)、グループの権限、(rwx)、その他ユーザの権限(r-x)を表す
-
-3. ディレクトリを SCRIPT の中に移動し、ファイルの一覧を見る
+3.
 ```
-pi@gc1624:~ $ cd SCRIPT/
-pi@gc1624:~/SCRIPT $ pwd
-/home/pi/SCRIPT
-pi@gc1624:~/SCRIPT $ ls -l
-total 16
-drwx------ 2 root root 12288 Nov 12 20:59 lost+found
-drwxr-xr-x 6 pi   pi    3072 Mar  8 17:11 slider
-drwxr-xr-x 3 pi   pi    1024 Feb 27 22:22 wvdial
-```
-slider というフォルダがあるので、この下に入り、ファイルの一覧を見る
-```
-pi@gc1624:~/SCRIPT $ cd slider/
-pi@gc1624:~/SCRIPT/slider $ ls
-```
-4. 上のディレクトリに戻る
-```
-pi@gc1624:~/SCRIPT/slider $ cd ..
-pi@gc1624:~/SCRIPT $ cd ..
-pi@gc1624:~ $ pwd
-/home/pi
+pi@gc1624:~ $ ls /
+bin   dev  home  lost+found  mnt  proc  run   srv  tmp  var
+boot  etc  lib   media       opt  root  sbin  sys  usr
 ```
 
-`..` が、一つ上のディレクトリを表す
-
-5. ファイル名はタブキーで補完ができる。
-例えば、`cd S` まで打った所でタブキーを押すと `cd cd SCRIPT/` とファイル名を補完してくれる
-
-### ファイルの作成
-1. nano エディタを使い、ファイルを作成する
-
+4.
 ```
-cd /home/pi
-nano a.txt
+pi@gc1624:~ $ ls /media
+usb  usb0  usb1  usb2  usb3  usb4  usb5  usb6  usb7
 ```
 
-以下のような画面になる
-
-<img src="pic/ss.2017-03-17 21.09.51.png" width="75%">
-
-なんでもいいので文字列を入力してみる
-
-<img src="pic/ss.2017-03-17 21.34.09.png" width="75%">
-
-下の欄にはコマンドが表示されている。`^`は `contl +` の意味。`contl + G` で HELP ファイルが表示される。HELP の表示を終了して元に戻るには `contl + X`  
-編集の終了は `contl + X` 保存するかどうか聞かれるので　`y` と答える  
-<img src="pic/ss.2017-03-17 21.41.39.png" width="75%">
-
-、保存するファイル名を再確認されるので、そのままでよければそのまま改行する  
-<img src="pic/ss.2017-03-17 21.41.56.png" width="75%">
-ここで別のファイル名を入力すると別名で保存される
-
-### ファイルの簡単な作成
-echo コマンドで文字列を表示できる。表示先をファイル名にリダイレクトするとファイルに保存される
-
-1. `echo abc` と入力。abc と表示される
-2. `echo abc > c.txt` と入力。なにも表示されない
-3. `ls` c.txt が作成されている
-
-### ファイルの編集
-先ほど作成した a.txt ファイルを再度開く
+5.
 ```
-nano a.txt
+pi@gc1624:~ $ ls /media/usb0
+pi@gc1624:~ $ ls /media/usb1
+pi@gc1624:~ $
 ```
 
-3行目を削除する。カーソルキーで３行目に移動し、`contl + K` で行を削除する  
-カット&ペーストのペーストは `contl + U`
-指定行への移動は `contl + -`。文字列の検索は `contl + W`
+6.
+```
+pi@gc1624:~ $ lsusb
+Bus 001 Device 006: ID 0bda:0109 Realtek Semiconductor Corp.
+Bus 001 Device 005: ID 056e:7007 Elecom Co., Ltd
+Bus 001 Device 003: ID 0424:ec00 Standard Microsystems Corp. SMSC9512/9514 Fast Ethernet Adapter
+Bus 001 Device 002: ID 0424:9514 Standard Microsystems Corp.
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+```
 
-### ファイルのコピー
-`cp a.txt b.txt` で、ファイル a.txt を b.txt にコピー
+7.
+```
+pi@gc1624:~ $ df
+Filesystem     1K-blocks    Used Available Use% Mounted on
+/dev/root        3404364 2662536    580196  83% /
+devtmpfs          469536       0    469536   0% /dev
+tmpfs             473868       0    473868   0% /dev/shm
+tmpfs             473868    6444    467424   2% /run
+tmpfs               5120       4      5116   1% /run/lock
+tmpfs             473868       0    473868   0% /sys/fs/cgroup
+/dev/mmcblk0p1   3507840  419256   3088584  12% /boot
+/dev/mapper/i3    247791   78426    152265  34% /home/pi/SCRIPT
+/dev/mapper/i4    247791  103988    126703  46% /var/www/html/SCRIPT
+/dev/sda1          63503   20725     42778  33% /media/usb0
+/dev/sda2        1814528  863108    850988  51% /media/usb1
+```
+8.
+```
+pi@gc1624:~ $ ls /media
+usb  usb0  usb1  usb2  usb3  usb4  usb5  usb6  usb7
+pi@gc1624:~ $ ls /media/usb0
+bcm2708-rpi-0-w.dtb     bootcode.bin   fixup_x.dat       start_cd.elf
+bcm2708-rpi-b.dtb       cmdline.txt    issue.txt         start_db.elf
+bcm2708-rpi-b-plus.dtb  config.txt     kernel7.img       start.elf
+bcm2708-rpi-cm.dtb      COPYING.linux  kernel.img        start_x.elf
+bcm2709-rpi-2-b.dtb     fixup_cd.dat   LICENCE.broadcom
+bcm2710-rpi-3-b.dtb     fixup.dat      LICENSE.oracle
+bcm2710-rpi-cm3.dtb     fixup_db.dat   overlays
+pi@gc1624:~ $ ls /media/usb1
+bin   dev  home  lost+found  mnt  proc  run   srv  tmp  var
+boot  etc  lib   media       opt  root  sbin  sys  usr
+```
 
-### ファイルの表示
-`cat a.txt` で　a.txt を表示  
-尚、コマンド名の cat は `concatenate` の短縮で、本来このコマンドは複数のファイルを結合したものを表示する  
-`cat a.txt b.txt` で、両者を結合したファイルの表示
+### gc15 の auto mount
+R/W を Raspberry Pi の USB ポートに装着 ***せずに***、自身の gc16 に terminal でログインする
 
-### ファイルの削除
-`rm a.txt b.txt` で、ファイルa.txt と b.txt 削除
+1.
+```
+pi@gc1524:/var/www/html $ ls /media
+pi
+```
 
-### sudo
-`sudo` の名の由来は `substitute user do` だが、よく`superuser do`と呼ばれるとおり、コマンドをスーパーユーザーの権限で実行する。sudo は許可されたユーザーのみが使うことができ、`pi`ユーザは`sudo`を許可されている
+```
+pi@gc1524:/var/www/html $ ls /media/pi
+158717B0012C7F83
+```
 
-1. `cd /boot` で boot ディレクトリに移動
 ```
-pi@gc1624:~ $ cd /boot
-pi@gc1624:/boot $
+pi@gc1524:~ $ ls /media/pi/158717B0012C7F83/
+ls: cannot open directory /media/pi/158717B0012C7F83/: Permission denied
+pi@gc1524:~ $ sudo ls /media/pi/158717B0012C7F83/
+pi@gc1524:~ $
 ```
-2. `echo abc > c.txt` を実行しても、権限がないためコマンドの実行を拒否される
+
+2.
 ```
-pi@gc1624:/boot $ echo abc > c.txt
--bash: c.txt: Permission denied
+pi@gc1524:~ $ sudo ls /media/pi/
+158717B0012C7F83  adc806ed-d763-4eab-8319-b7ecfb276845	boot
 ```
-3. `sudo sh -c 'echo abc > c.txt'` を実行。c.txt ファイルが作成される
+
 ```
-pi@gc1624:/boot $ sudo sh -c 'echo abc > c.txt'
-pi@gc1624:/boot $ ls
-bcm2708-rpi-b.dtb       COPYING.linux       FSCK0001.REC      LICENSE.oracle
-bcm2708-rpi-b-plus.dtb  crontab.slider.txt  gc_cid            overlays
-bcm2708-rpi-cm.dtb      c.txt               gc.ini            sc.txt
-bcm2709-rpi-2-b.dtb     DATA                gc_issue.txt      sliders.tiff
-bcm2710-rpi-3-b.dtb     fixup_cd.dat        gc_log.txt        start_cd.elf
-bcm2710-rpi-cm3.dtb     fixup.dat           issue.txt         start_db.elf
-bootcode.bin            fixup_db.dat        kernel7.img       start.elf
-cmdline.txt             fixup_x.dat         kernel.img        start_x.elf
-config.txt              FSCK0000.REC        LICENCE.broadcom
-pi@gc1624:/boot $ sudo rm c.txt
+pi@gc1524:~ $ sudo ls /media/pi/158717B0012C7F83/
+pi@gc1524:~ $
 ```
-`sudo echo abc > c.txt` としなかったのは、sudo がリダイレクトの先までに及ばないため、sh コマンドで別の shell を起こし、その全体に sudo を適用した。
+
+```
+pi@gc1524:~ $ ls /media/pi/adc806ed-d763-4eab-8319-b7ecfb276845/
+bin   dev  home  lost+found  mnt  proc  run   srv  tmp  var
+boot  etc  lib   media       opt  root  sbin  sys  usr
+```
+
+```
+pi@gc1524:~ $ ls /media/pi/boot/
+bcm2708-rpi-0-w.dtb     bootcode.bin   fixup_x.dat       start_cd.elf
+bcm2708-rpi-b.dtb       cmdline.txt    issue.txt         start_db.elf
+bcm2708-rpi-b-plus.dtb  config.txt     kernel7.img       start.elf
+bcm2708-rpi-cm.dtb      COPYING.linux  kernel.img        start_x.elf
+bcm2709-rpi-2-b.dtb     fixup_cd.dat   LICENCE.broadcom
+bcm2710-rpi-3-b.dtb     fixup.dat      LICENSE.oracle
+bcm2710-rpi-cm3.dtb     fixup_db.dat   overlays
+```
+
+### セキュアストレージ
+gc16 の SD カードを挿した SD カード R/W を Raspberry Pi の USB ポートに装着 ***して***、自身の gc15 に RemoteDesktop でログインする
+
+1. メニュー [Raspberry]-[Preferences]-[GParted]を開く  
+<img src="pic/ss.2017-03-10 14.52.00.png" width="75%">
+
+2. GPartedを使うには sudo 可能なユーザーでの sudo が必要なので、gc15 の pi アカウントのパスワード（変更していなければ `gc15pw`）を入力する  
+<img src="pic/ss.2017-03-10 14.52.25.png" width="75%">
+
+3. GParted アプリの右上のデバイス選択メニューで `/dev/sda` を選択して、USB ポートに装着した gc16 のストレージのパーティション構造を観察する  
+<img src="pic/ss.2017-03-10 14.52.53.png" width="75%">  
+以下のようになっている
+  - unallocated
+  - /dev/mmcblk0p1 fat32
+  - /dev/mmcblk0p2 ext4
+  - /dev/mmcblk0p3 crypt-luks
+  - /dev/mmcblk0p4 crypt-luks
+  - unallocated
+
+crypt-luks が暗号化ファイルシステム
+
+4. terminal ソフトを開いて `df` を確認する  
+
+```
+pi@gc1524:~ $ df
+Filesystem     1K-blocks    Used Available Use% Mounted on
+/dev/root        4766652 4149744    377192  92% /
+devtmpfs          469536       0    469536   0% /dev
+tmpfs             473868       0    473868   0% /dev/shm
+tmpfs             473868    6528    467340   2% /run
+tmpfs               5120       4      5116   1% /run/lock
+tmpfs             473868       0    473868   0% /sys/fs/cgroup
+/dev/mmcblk0p1   2094056   25736   2068320   2% /boot
+/dev/mapper/i3    247791   16666    214025   8% /home/pi/SCRIPT
+/dev/mapper/i4    247791   95374    135317  42% /var/www/html/SCRIPT
+tmpfs              94776       0     94776   0% /run/user/1000
+/dev/sda1        3507840  419320   3088520  12% /media/pi/boot
+/dev/sda2        3404364 2662576    580156  83% /media/pi/3598ef8e-09be-47ef-9d01-f24cf61dff1d
+```
+
+5.
+```
+pi@gc1524:~ $ ls /media/pi/3598ef8e-09be-47ef-9d01-f24cf61dff1d
+bin   dev  home  lost+found  mnt  proc  run   srv  tmp  var
+boot  etc  lib   media       opt  root  sbin  sys  usr
+```
+
+6.
+```
+pi@gc1524:~ $ ls /media/pi/3598ef8e-09be-47ef-9d01-f24cf61dff1d/home/pi
+2013-10-27 13.36.31.jpg  haarcascade_frontalface_default.xml  SCRIPT
+a.php                    I2C_LCD_driver.py                    ssd1306.py
+a.py                     install                              ssd1306.pyc
+a.txt                    led.sh                               ssd1306_test.py
+bk.txt                   LOG                                  tf.py
+facemosaic.py            mosaic.jpg
+gc_ssd1306.pyc           old
+```
+
+7.
+```
+pi@gc1524:~ $ ls /media/pi/3598ef8e-09be-47ef-9d01-f24cf61dff1d/home/pi/SCRIPT/
+```
