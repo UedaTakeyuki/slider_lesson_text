@@ -190,5 +190,74 @@ pi@gc1524:/media/pi/3598ef8e-09be-47ef-9d01-f24cf61dff1d $
 ```  
 なにもない
 
+### 実際のコードの確認
+slider は strage への保存モジュールを設定で変更することができる。デフォルトの保存モジュールは
+  - gen_saver.py: センサデータの generic な保存モジュール
+  - gen_pic_saver.py: 撮影画像の generic な保存モジュール
+
+1. gen_saver.py の実装を見る  
+```
+pi@gc1624:~ $ cat -n SCRIPT/slider/gen_saver.py
+     1	# coding:utf-8 Copy Right Atelier Grenouille © 2015 -
+     2	#
+     3	# require: 'usbrh'
+     4	# http://www.infiniteloop.co.jp/blog/2013/02/raspberrypitem/
+     5	import os
+     6	import sys
+     7	import datetime
+     8	import locale
+     9	import time
+    10	import commands
+    11	import subprocess
+    12	import logging
+    13	import traceback
+    14
+    15
+    16	import requests
+    17	import getserialnumber as gs
+    18	import getversion      as gv
+    19
+    20	import ConfigParser
+    21	import inspect
+    22
+    23	# 定数
+    24	configfile = os.path.dirname(os.path.abspath(__file__))+'/gen_saver.ini'
+    25	reboot = 'sudo reboot'
+    26	network_restart = 'sudo service networking restart'
+    27
+    28	# グローバル
+    29	g_count_of_file_ioerrors=0   # File IOERROR の回数。３回連続する場合、再起動する
+    30	g_count_of_network_ioerrors=0   # Network IOERROR の回数。３回連続する場合、再起動する
+    31
+    32	# 設定の取得
+    33	ini = ConfigParser.SafeConfigParser()
+    34	ini.read(configfile) #繰り返し毎に設定を取得
+    35
+    36	# データ保存フォルダ
+    37	data_path = ini.get("save", "data_path")
+    38
+    39	# ログファイルの設定
+    40	logging.basicConfig(format='%(asctime)s %(filename)s %(lineno)d %(levelname)s %(message)s',filename=ini.get("log", "log_file"),level=logging.DEBUG)
+    41
+...
+...
+    73
+    74	def save(serialid, name, value):
+    75	    print "start saving..."
+    76	    now = datetime.datetime.now() # 時刻の取得
+    77	    now_string = now.strftime("%Y/%m/%d %H:%M:%S")
+    78	    path = data_path+"/"+name+".csv"
+    79	    line = now_string+","+str(value)+","+serialid
+    80	    logfile = open(path, 'a')
+    81	    print >> logfile, line
+    82	    logfile.close()    
+    83	    print "end saving..."
+    84
+```  
+ポイントは以下  
+  - 24行: 設定ファイルは `config.ini`
+  - 33 - 37行: .ini ファイルのセクション`save`、キー`data_path`の値を取得
+  - 78行: data_path 配下に保存
+
 ##<u>ポイント解説</u>
 1. /tmp を ramdisk で運用していると /tmp が溢れて RPi が止まってしまうことがある。/tmp 自体を ramdisk にするのではなく、適当なフォルダ（/home/pi/tmp 等）を ramdisk 化し、セキュアな情報を含む一時ファイルをそこで運用するようにしたほうがよい

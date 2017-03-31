@@ -119,6 +119,10 @@ Type "help", "copyright", "credits" or "license" for more information.
 <img src="pic/ss.2017-03-28 20.14.21.png" width="75%">
 
 ### 実際のコードの確認
+slider は送信モジュールを設定で変更することができる。デフォルトの送信モジュールは
+  - gen_sender.py: センサデータの generic な送信モジュール
+  - gen_pic_sender.py: 撮影画像の generic な送信モジュール
+
 1. センサデータの送信
 ```
 pi@gc1624:~ $ cat -n SCRIPT/slider/gen_sender.py

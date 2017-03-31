@@ -142,3 +142,105 @@ pi@gc1624:~/SCRIPT/slider $ cat -n /home/pi/SCRIPT/slider/dht22.py
   - 51 - 70行: センサから取得した温度と湿度を使って飽差を計算
   - 72: read() インターフェースを用意しておく。異なるセンサに対して共通インターフェースを定義すると制御が簡単になる
   - 76: センサからの取得値だけではなく、計算して作成した飽差も戻り値に混ぜる
+
+### センサの追加
+CPU の温度を取得するアプリケーションを作成する。dht22.py と同様、以下のインターフェースで作成する
+
+  - read() を持つ。戻り値は `{データ名: 値文字列, ...}` の形式
+
+1. CPU 温度は `vcgencmd measure_temp` で取得できる
+```
+pi@gc1624:~ $ vcgencmd measure_temp
+temp=37.0'C
+```
+
+2. python をインタラクティブに起動して subprocess で取得してみる
+```
+Python 2.7.9 (default, Sep 17 2016, 20:26:04)
+[GCC 4.9.2] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import subprocess
+>>> p = subprocess.Popen("vcgencmd measure_temp", stdout=subprocess.PIPE, shell=True)
+>>> value = p.stdout.readline()
+>>> value
+"temp=41.9'C\n"
+```  
+
+3. 値の末尾の改行が邪魔なので strip() する。末尾の空白類を strip してくれる  
+```
+>>> value.strip()
+"temp=41.9'C"
+```
+
+4. `=` を区切り文字として前後に分ける  
+```
+>>> pair=value.strip().split('=')
+>>> pari[0]
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'pari' is not defined
+>>> pair[0]
+'temp'
+>>> pair[1]
+"41.9'C"
+>>>
+```
+
+5. 単位がいらないので、正規表現をつかって数値だけとりだす
+```
+>>> import re
+>>> match_result = re.match('([0-9,.]*).*', pair[1])
+>>> match_result.group(1)
+'41.9'
+```
+
+6. `{データ名: 値文字列, ...}` の形式にする
+```
+>>> result = {'cpu_temp': match_result.group(0)}
+>>> result
+{'cpu_temp': '41.9'}
+```
+
+7. 以上を纏めて、SCRIPT/slider 配下に cpu.py というファイルを作る
+```
+pi@gc1624:~/SCRIPT/slider $ cd
+pi@gc1624:~ $ cd SCRIPT/slider/
+pi@gc1624:~/SCRIPT/slider $ nano cpu.py
+```  
+内容は以下  
+```
+import subprocess
+import re
+
+def remove_unit(val_unit_str):
+  match = re.match('([0-9,.]*).*', val_unit_str)
+  return match.group(1)
+
+def read():
+  p = subprocess.Popen("vcgencmd measure_temp", stdout=subprocess.PIPE, shell=True)
+  value = p.stdout.readline().strip().split('=')[1]
+  return {'cpu_temp': remove_unit(value)}
+
+if __name__ == '__main__':
+  value = read()
+```  
+同じ物が cpu_shell.py に用意してあるのでコピーしても良い  
+```
+pi@gc1624:~/SCRIPT/slider $ cp cpu_shell.py cpu.py
+```
+
+7. python で実行してみる  
+```
+pi@gc1624:~/SCRIPT/slider $ python cpu.py
+{'cpu_temp': '46.7'}
+pi@gc1624:~/SCRIPT/slider $ python -m cpu
+{'cpu_temp': '46.7'}
+pi@gc1624:~/SCRIPT/slider $ python
+Python 2.7.9 (default, Sep 17 2016, 20:26:04)
+[GCC 4.9.2] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import cpu
+>>> cpu.read()
+{'cpu_temp': '46.2'}
+>>>
+```
