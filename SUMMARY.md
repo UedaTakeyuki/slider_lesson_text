@@ -30,7 +30,7 @@
   * [20.データの保存先](20_strage.md)
   * [21.HTTP REST API](21_restapi.md)
   * [22.制御アプリ read.py](22_read.md)
-  * [23.音の再生](chapter2.md)
+  * [23.音の再生](23_alsa.md)
   * [24.Speech Synthesis](chapter2.md)
   * [25.制御サービス clocknote](chapter2.md)
 * [Rpiによるネットワーク構築](chapter6.md)

@@ -382,12 +382,12 @@ pi@gc1624:~/SCRIPT/slider $ cat -n config.toml
 ```
 
 4. 11行目以降に`cpu`の記載を追加  
-- センサモジュール名は`cpu`
-- データは以下
-  - 名前: `cpu_temp`
-  - 単位: `℃`
-  - 送信: `gen_sender`
-  - 保存: `gen_saver`
+  - センサモジュール名は`cpu`
+  - データは以下
+    - 名前: `cpu_temp`
+    - 単位: `℃`
+    - 送信: `gen_sender`
+    - 保存: `gen_saver`
 完成例は以下  
 ```
 pi@gc1624:~/SCRIPT/slider $ cat -n config.toml
@@ -417,7 +417,8 @@ pi@gc1624:~/SCRIPT/slider $ cat -n config.toml
     24	#	data =["pic","dummy","gen_pic_sender", "gen_pic_saver"]
 ```
 
-5. `/boot/DATA` に `cpu_temp.csv` が出来ていることを確認
+5. `/boot/DATA` に `cpu_temp.csv` が出来ていることを確認  
+  
 ```
 pi@gc1624:~/SCRIPT/slider $ ls /boot/DATA
 cpu_temp.csv  humidity.csv  humiditydeficit.csv  lena_std.jpg  temp.csv  video0
