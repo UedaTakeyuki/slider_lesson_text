@@ -48,11 +48,11 @@ gc15, gc16 では shell in a box がインストールしてあり、Web ブラ�
 
 1. PC で chrome を開き、上で調べた IP アドレスで自分の Raspberry Pi に Web で接続する。下記の画面になる
 
-<img src="pic/ss.2017-03-08 21.07.06.png" width="75%">
+<img src="pic/ss.2017-03-08 21.01.34.png" width="75%">
 
 2. shell in a box をクリックすると下記の画面になるのでログインする
 
-<img src="pic/ss.2017-03-09 21.34.35" width="75%">
+<img src="pic/ss.2017-03-09 21.34.35.png" width="75%">
 
 3. （任意）raspberry pi に shell in a box をインストールするスクリプトは以下  
 /home/pi/install/gc_setups/shellinabox.setup.sh  
