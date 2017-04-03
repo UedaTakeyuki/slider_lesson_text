@@ -35,7 +35,7 @@
   * [25.制御サービス clocknote](25_clocknote.md)
 * [Rpiによるネットワーク構築](chapter6.md)
   * [26.MANET(Mobile Ad-hoc Network)](26_manet.md)
-  * [27.Raspberry Pi で Mobile Router を作成](chapter2.md)
+  * [27.Raspberry Pi で Mobile Router を作成](27_router.md)
   * [28.Raspberry Pi で Server を作成](chapter2.md)
   * [29.マイクロサービス](chapter2.md)
   * [30.Ajax API の作り方](chapter2.md)
