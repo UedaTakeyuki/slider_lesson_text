@@ -116,7 +116,6 @@ pi@gc1624:/var/www/html/SCRIPT/say $ cat -n jsay.mei.sh
   - 15行目: 出力を /tmp/jsay.wav
   - 16行目: aplay で /tmp/jsay.wav を再生
 open_jtalk は名古屋工業大学で開発されている`日本語`音声合成エンジン  
-ライセンスは Modified BSD license.
 
 6.（任意）open_jtalk のインストール  
 ```
@@ -125,7 +124,6 @@ pi@gc1624:/var/www/html/SCRIPT/say $ cat openjtalk.setup.sh
 
 ### espeak（任意）
 open-jtalk は`日本語`以外の言語では espeak が多言語に対応しており、英語だけで6方言、アフリカーンス、ボスニア語、フランス語、デンマーク語、ギリシャ語、クルド語、ラトビア語、タミル語など多くの言語に対応した言語定義ファイルと音響ファイルが用意されている  
-ライセンスは GPL.
 以下、espeak で中国語を喋らせる
 
 1. config.ini ファイルを編集して command_path を espeak.zh.sh に変更する  
