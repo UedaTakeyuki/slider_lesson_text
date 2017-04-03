@@ -41,7 +41,7 @@
   * [30.Ajax API の作り方](chapter2.md)
   * [31.JSON(JavaScript Object Notation)](chapter2.md)
   * [32.ストリームデータ処理の実装](chapter2.md)
-  * [33.MQTT(Message Queue Telemetry Transport)](chapter2.md)
+  * [33.MQTT(Message Queue Telemetry Transport)](33_mqtt.md)
 * [lap up](chapter7.md)
   * [34.monitor サービスの利用（任意）](chapter2.md)
   * [35.クライアントとサーバを兼ねる構成](chapter2.md)
