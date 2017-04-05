@@ -291,7 +291,7 @@ pi@gc1624:/var/www/html/gpio $ cp index.html index.php
 </head>
 <body>
 <?php
-  for ($i = 0; $i < 30; $i++){
+  for ($i = 1; $i < 30; $i++){
     echo '<p>GPIO '.$i.' = '.`sudo gpio read $i`.'</p>';
   }
 ?>
@@ -299,4 +299,4 @@ pi@gc1624:/var/www/html/gpio $ cp index.html index.php
 </html>
 ```  
 再表示すると、以下のように表示される  
-<img src="pic/ss.2017-04-05 7.44.46.png" width="75%">  
+<img src="pic/ss.2017-04-05 15.55.46.png" width="75%">  

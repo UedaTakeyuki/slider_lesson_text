@@ -1,4 +1,4 @@
-# 33.MQTT(Message Queue Telemetry Transport)
+# 32.MQTT(Message Queue Telemetry Transport)
 
 ##<u>目的</u>
 IoT に適したプロトコルとして脚光を浴びている MQTT プロトコルの、事実上の標準実装である mosquitto MQTT Broker の準備、利用方法を理解する  
