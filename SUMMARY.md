@@ -37,7 +37,7 @@
   * [26.MANET(Mobile Ad-hoc Network)](26_manet.md)
   * [27.Raspberry Pi で Mobile Router を作成](27_router.md)
   * [28.Raspberry Pi で Server を作成](28_server.md)
-  * [29.マイクロサービス](chapter2.md)
+  * [29.monitor サービス](29_monitor.md)
   * [30.Ajax API の作り方](chapter2.md)
   * [31.JSON(JavaScript Object Notation)](chapter2.md)
   * [32.ストリームデータ処理の実装](chapter2.md)
