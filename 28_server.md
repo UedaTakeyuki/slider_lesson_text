@@ -273,7 +273,7 @@ pi@gc1624:/var/www/html/gpio $ cp index.html index.php
 ```  
 エディタで index.php を開き、`<p>GPIO 1 = </p>` の行に以下のように php のコードを追加する  
 ```
-<p>GPIO 1 = <?php echo `sudo gpio read 1` ?>></p>
+<p>GPIO 1 = <?php echo rtrim(`sudo gpio read 1`) ?>></p>
 ```  
 先ほどと同じアドレスで再度ブラウザで表示（再読み込み）すると、下記のように表示される
 <img src="pic/ss.2017-04-05 7.33.12.png" width="75%">  
@@ -292,7 +292,7 @@ pi@gc1624:/var/www/html/gpio $ cp index.html index.php
 <body>
 <?php
   for ($i = 1; $i < 30; $i++){
-    echo '<p>GPIO '.$i.' = '.`sudo gpio read $i`.'</p>';
+    echo '<p>GPIO '.$i.' = '.rtrim(`sudo gpio read $i`).'</p>';
   }
 ?>
 </body>
