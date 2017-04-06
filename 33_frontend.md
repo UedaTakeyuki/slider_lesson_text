@@ -3,10 +3,29 @@
 ##<u>目的</u>
 柔軟かつシンプルに mobile first なフロントエンドを作るために Bootstrap と jQuerry Mobile の使い方を理解し、あわせて ajax API のブラウザからの呼び出し方法を理解する
 
+##<u>実習手順</u>
+自身の gc16 に terminal でログインする
+
+### 準備
+Bootstrap, jQuerry, jQuery-mobile 等の javascript ライブラリは通常だと `npm` コマンドでインストールするのだが、教室の環境は外部ネットワークにつながっていないので、既にインストール済みの別の Web アプリケーションの node_modules をコピーする
+
+1. `/var/www/html/gpio/` に移動  
 ```
 pi@gc1624:~ $ cd /var/www/html/gpio/
+```
+
+2. `monitor` の `node_modules` をコピー  
+```
 pi@gc1624:/var/www/html/gpio $ cp -rp ../SCRIPT/monitor/node_modules/ .
+```
+
+3. `BackupPi_2` の `node_modules` の中の `jquery-mobile` だけを、上でコピーした `node_modules` にコピー  
+```
 pi@gc1624:/var/www/html/gpio $ cp -rp ../SCRIPT/BackupPi_2/node_modules/jquery-mobile node_modules
+```
+
+4. コピーした node-modules の確認  
+```
 pi@gc1624:/var/www/html/gpio $ npm list
 /var/www/html/gpio
 ├── bootstrap@3.3.7
@@ -56,6 +75,7 @@ pi@gc1624:/var/www/html/gpio $ npm list
     └── through@2.3.8
 ```
 
+5. index.php に jQuery, Bootstrap, jQuery-mobile を取り込む  
 下記のように 6 - 14行目を `<titel></title>` の下に挿入
 ```
 1	<!DOCTYPE html>
@@ -81,9 +101,12 @@ pi@gc1624:/var/www/html/gpio $ npm list
 21	?>
 22	</body>
 23	</html>
-```
+```  
 
-jquery mobile でヘッダとフッタを付ける
+### スマフォ風の UI に
+1. jQuery mobile でヘッダとフッタを付ける  
+下記のように 17 - 23行目、25 - 33行目を挿入して、jQuery-mobile のページ構成にする
+
 ```
 1	<!DOCTYPE html>
 2	<html lang="ja">
@@ -120,9 +143,13 @@ jquery mobile でヘッダとフッタを付ける
 33	  </div>
 34	</body>
 35	</html>
-```
+```  
+下記のような表示になる  
+<img src="pic/ss.2017-04-05 18.36.34.png" width="75%">  
 
-mobile first でレスポンシブルな表示にするために BootStrap のグリッドシステムを使う
+2. レスポンシブデザイン
+mobile first でレスポンシブな表示にするために BootStrap のグリッドシステムを使う  
+24行、33行の `<class="row">` class と 28行、30行の `<class="col-xx-xx">` を追加した  
 ```
 1	<!DOCTYPE html>
 2	<html lang="ja">
@@ -165,8 +192,18 @@ mobile first でレスポンシブルな表示にするために BootStrap の�
 39	  </div>
 40	</body>
 41	</html>
-```
+```  
+28行目の意味は、「普通のサイズの場合は幅の 2/12 を使って表示、小さいサイズの場合は幅の 3/12、凄く小さいサイズの場合は 6/12」で、それぞれ 6段表示、4段表示、 2段表示になる  
 
+ブラウザのサイズに合わせて下記のような表示になる
+<img src="pic/ss.2017-04-05 18.39.17.png" width="75%">  
+<img src="pic/ss.2017-04-05 18.39.28.png" width="75%">  
+<img src="pic/ss.2017-04-05 18.39.40.png" width="75%">  
+
+3. 静的な文字列は静的なままに
+上のコードで、28行と30行は、dom の静的な要素であったはずの <div> を echo で動的に生成している  
+最終的にできあがる HTML はかわらないのだが静的なものは静的にしておきたいので、下記のように変更することができる  
+29行と31行は php の for loop によって繰り返し生成される  
 ```
 1	<!DOCTYPE html>
 2	<html lang="ja">
@@ -215,6 +252,9 @@ mobile first でレスポンシブルな表示にするために BootStrap の�
 45	</html>
 ```
 
+4. 制御構造に関する別の構文(Alternative syntax for control structures)
+php のブロック `{` と html のタグ `<` がまじって構造が見にくくくなることを避けるために  
+`別の構文`で書き換えるとかなりリーダブルなコードになる
 ```
 1	<!DOCTYPE html>
 2	<html lang="ja">
@@ -256,9 +296,14 @@ mobile first でレスポンシブルな表示にするために BootStrap の�
 38	  </div>
 39	</body>
 40	</html>
-```
+```  
+ポイント
+  - 26行: 開きカッコの代わりに、python 風の `:`  
+  - 28行: echo 分の代わりに、<?= 値 ?>
+  - 30行: 閉じカッコの代わりに `endfor;`
 
-php がどのように展開しているかは、index.php ファイルを php インタプリタで実行することでみることができる
+5. php によって生成される html の確認
+php がどのように展開しているかは、index.php ファイルを php インタプリタで実行することでみることができる  
 ```
 php index.php
 ```  
@@ -268,7 +313,15 @@ php index.php
 php インタプリタで .php ファイルを実行してエラーメッセージを表示させるのも有益  
 
 ### SPA と ajax
-gpio の値を javascript から操作できるようにするため `<span>`要素にして、`id`を持たせる
+この Web アプリケーションはリロードするたびに GPIO の現在の値の一覧を表示する  
+これを GPIO の値に変化があった時に自動的に反映されるように変更する  
+方法は簡単で  
+  - 表示する値に ID を付ける
+  - interval loop から ajax で値を取得、ID で取得した dom 要素を書き換える
+
+1. 表示する値に ID を付ける
+gpio の値を javascript から操作できるようにするため `<span>`要素にして、`id`を持たせる  
+変更箇所は 28行目で、表示される gpio の値を`<span id="gpio_1"></span>`で囲む  
 ```
 1	<!DOCTYPE html>
 2	<html lang="ja">
@@ -310,9 +363,9 @@ gpio の値を javascript から操作できるようにするため `<span>`要
 38	  </div>
 39	</body>
 40	</html>
-```
+```  
 
-展開された html には以下のように `gpio_1`, `gpio_2`, ... という固有の ID が付く
+展開された html には以下のように `gpio_1`, `gpio_2`, ... という固有の ID が付く  
 ```
 pi@gc1624:/var/www/html/gpio $ php index.php | cat -n
      1	<!DOCTYPE html>
@@ -439,6 +492,10 @@ pi@gc1624:/var/www/html/gpio $ php index.php | cat -n
    122	</html>
 ```
 
+2. interval loop から ajax で値を取得、ID で取得した dom 要素を書き換える  
+16行 - 33行目の`script`を追加した  
+18行目以下の $.ajax で、先ほど作成した ajax.php を呼び出し、gpio の値を取得  
+26行目で<span></span> を getElementById で取得し、ajax で取得した値で書き換える  
 ```
 1	<!DOCTYPE html>
 2	<html lang="ja">
@@ -499,9 +556,12 @@ pi@gc1624:/var/www/html/gpio $ php index.php | cat -n
 57	  </div>
 58	</body>
 59	</html>
-```
+```  
 
+`自分のgc16のホスト名.local/gpio`をブラウザで再読み込みして、下記のように gpio コマンドで gpio の値をいろいろ変えてみる  
+変更が自動的に反映される  
 ```
 pi@gc1624:/var/www/html/gpio $ gpio mode 1 out
 pi@gc1624:/var/www/html/gpio $ gpio write 1 1
+pi@gc1624:/var/www/html/gpio $ gpio write 1 0
 ```

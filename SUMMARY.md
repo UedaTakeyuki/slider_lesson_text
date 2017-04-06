@@ -41,7 +41,7 @@
   * [30.Ajax API の作り方](30_ajax.md)
   * [31.ストリームデータ処理の実装](31_stream_data.md)
   * [32.MQTT(Message Queue Telemetry Transport)](32_mqtt.md)
-  * [33.front endの実装)](chapter2.md)
+  * [33.front endの実装)](33_frontend.md)
 * [lap up](chapter7.md)
   * [34.monitor サービスの利用（任意）](chapter2.md)
   * [35.クライアントとサーバを兼ねる構成](chapter2.md)
