@@ -1,7 +1,7 @@
-slidr_lesson_text_book.pdf: version.md
+slidr_lesson_text.pdf: version.md
 		gitbook pdf
 		rm version.txt version.md
-		mv book.pdf slidr_lesson_text_book.pdf
+		mv book.pdf slidr_lesson_text.pdf
 
 version.txt:
 		echo '# version of source file' > version.txt
