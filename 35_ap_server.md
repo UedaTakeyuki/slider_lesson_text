@@ -6,6 +6,20 @@ gc16 をルーターとして実行しつつ、slider と monitor を起動す�
 本章では、gc16 にクライアントとサーバを兼ねさせる構成を設定する方法を説明する
 
 ##<u>実習手順</u>
+
+### 送信先の変更
+送信先を `http://monitor.uedasoft.com` に変更する
+
+1. 自身の gc16 に terminal でログインする
+2. /home/pi/SCRIPT/slider に移動  
+```
+pi@gc1624:~ $ cd SCRIPT/slider/
+```
+
+3. gen_sender.ini を編集  
+10行目のように `url_base` を `http://localhost/SCRIPT/monitor/` にする  
+末尾の `/` は必要   
+また、`[monitor]`セクションの `mode`を`public`にする  
 ```
 pi@gc1624:~/SCRIPT/slider $ cat -n gen_sender.ini
      1	[send]
@@ -33,6 +47,9 @@ pi@gc1624:~/SCRIPT/slider $ cat -n gen_sender.ini
     23	#mode=private
 pi@gc1624:~/SCRIPT/slider $
 ```
+4. 同様に gen_pic_sender.ini を編集  
+`url_base` を `http://localhost/SCRIPT/monitor/` にして
+`[monitor]`セクションの `mode`を`public`にする  
 
 ```
 pi@gc1624:~/SCRIPT/slider $ cat -n gen_pic_sender.ini
@@ -61,6 +78,25 @@ pi@gc1624:~/SCRIPT/slider $ cat -n gen_pic_sender.ini
 pi@gc1624:~/SCRIPT/slider $
 ```
 
+### router として設定
+gc16を[routerとして設定](27_router.md#pi_network)して起動する  
+
+### 端末を pi ネットワークに接続
+PCやモバイル機器を以下のネットワークに接続する  
+- SSID: pi
+- psk:  Raspberry
+
+### ブラウザで monitor に接続
+下記のように `172.24.1.1`に接続
+<img src="pic/ss.2017-04-06 11.46.18.png" width="75%">  
+`Set DateTime`で RPi の時計を端末の時計であわせることができる  
+`motoin` を選択すると、下記のようなログイン画面が開くので、id, pw ともに `00`でログイン  
+<img src="pic/ss.2017-04-06 11.46.32.png" width="75%">  
+以下のように `monitor` が利用できる
+<img src="pic/ss.2017-04-06 11.50.52.png" width="75%">  
+
+### 表示要素の変更
+表示要素の変更は gc16 の `var/www/html/SCRIPT/monitor/uploads/0000000000000000` フォルダで .dini ファイルを編集する  
 ```
 pi@gc1624:/var/www/html/SCRIPT/monitor/uploads/0000000000000000 $ ls
 1_temp.dini             config.ini    humiditydeficit.csv  video1

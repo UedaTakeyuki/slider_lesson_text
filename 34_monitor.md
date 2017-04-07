@@ -45,7 +45,7 @@ pi@gc1624:~/SCRIPT/slider $ cat -n gen_sender.ini
     23	#mode=public
     24	mode=private
 ```
-
+4. 同様に gen_pic_sender.ini を編集  
 ```
 pi@gc1624:~/SCRIPT/slider $ cat -n gen_pic_sender.ini
      1	[send]

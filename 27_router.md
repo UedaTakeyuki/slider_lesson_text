@@ -116,13 +116,10 @@ iptables -A FORWARD -i ppp0 -o wlan0 -m state --state RELATED,ESTABLISHED -j $
 iptables -A FORWARD -i wlan0 -o ppp0 -j ACCEPT
 ```
 
+<a name="pi_network">
 ### gc16 の起動時設定
+</a>
 gc16 は設定で router として起動させることができる  
-その際、いままで見てきた hostapd, dnsmasq の設定で起動する
-- ssid:
-- psk:
-- 自身のIP アドレス: 172.24.1.1
-- 配布するIP アドレス: 172.24.1.50 - 172.24.1.150
 
 1. gc16 を shutdown  
 ```
@@ -147,6 +144,16 @@ network=pi
 network=wpa
 #network=adhoc
 #adhoc_address=172.24.1.4
-```
+```  
+この設定で、以下のような AP, DNS の設定で起動する
+- AP
+  - ssid:
+  - psk:
+- DNS  
+  - 自身のIP アドレス: 172.24.1.1
+  - 配布するIP アドレス: 172.24.1.50 - 172.24.1.150
+
+
+
 6. （任意）hostapd で SSID を一意なものに変更して起動する。PC のネットワーク接続を pi もしくは pi2 から自分設定した SSID のものにアクセスし、172.24.1.1 にログインする  
 hostapd の設定を元に戻して終了
