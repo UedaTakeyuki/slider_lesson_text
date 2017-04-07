@@ -30,7 +30,7 @@ git clone git@github.com:UedaTakeyuki/slider_lesson_text.git
 4. gitbook で book.pdf を作成
 ```
 cd slider_lesson_text
-gitbook pdf
+make
 ```
 
 このドキュメントは[源真ゴシック](http://jikasei.me/font/genshin/) を利用させていただき、体裁を確認させていただきました。[こちらの手順](http://backport.net/blog/2016/09/06/pdf_embedded_japanese_font/)を参照させていただき、[cloud9](https://c9.io)に源真ゴシックをインストールして pdf を作成しました

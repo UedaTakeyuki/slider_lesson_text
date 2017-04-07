@@ -312,7 +312,7 @@ php index.php
  .php ファイルの構文エラーでブラウザの画面が真っ白になった場合 nginx のエラーログ `/var/log/error/nginx/error.log` をしらべるのだが、単に
 php インタプリタで .php ファイルを実行してエラーメッセージを表示させるのも有益  
 
-### SPA と ajax
+### SPA(Single Page Application) と ajax
 この Web アプリケーションはリロードするたびに GPIO の現在の値の一覧を表示する  
 これを GPIO の値に変化があった時に自動的に反映されるように変更する  
 方法は簡単で  
