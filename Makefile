@@ -4,7 +4,7 @@ book.pdf: version.md
 
 version.txt:
 		echo '# version of source file' > version.txt
-		git log | head -n 3 >> version.txt
+		git log | head -n 4 >> version.txt
 		echo '' >> version.txt
 		git  remote -v >> version.txt
 
