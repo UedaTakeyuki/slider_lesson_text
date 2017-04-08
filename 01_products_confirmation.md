@@ -23,7 +23,8 @@ Micro USB や GPIO を通じて 5V の電力を供給すると起動する
 
 2. Raspberry Pi が正常に起動すると boot シーケンスからslider アプリケーションが起動されて LCD の表示がはじまる
 
-  1. 時計として時刻を表示する。ただし、RPi は RTC を持たず、表示される日時は正しくない
+  1. 時計として時刻を表示する  
+  ただし、RPi は RTC を持たず、表示される日時は正しくない
   2. 毎時30秒付近で以下を数秒ずつ表示する
 
     - 自身に割り当てられた IP アドレス
@@ -32,10 +33,14 @@ Micro USB や GPIO を通じて 5V の電力を供給すると起動する
 
   3. それらをスピーカーから合成音声で読み上げる
 
+<a name="setdatetime>
 ### 時刻の設定
+</a>
+
 slider の Web アプリケーションを使って PC の時刻で Raspberr Pi の時刻を合わせる
 
-1. PC で chrome を開き、IP アドレスを指定して自分の Raspberry Pi に接続する。IPアドレスは[こちら](classenvironment.md)で確認できる。以下の画面になる  
+1. PC で chrome を開き、IP アドレスを指定して自分の Raspberry Pi に接続する  
+IPアドレスは[こちら](classenvironment.md)で確認できる。以下の画面になる  
 
 <img src="pic/ss.2017-03-08 21.01.34.png" width="75%">
 
