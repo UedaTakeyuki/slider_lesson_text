@@ -116,9 +116,9 @@ iptables -A FORWARD -i ppp0 -o wlan0 -m state --state RELATED,ESTABLISHED -j $
 iptables -A FORWARD -i wlan0 -o ppp0 -j ACCEPT
 ```
 
-<a name="pi_network">
-### gc16 の起動時設定
-</a>
+<a name="pi_network"/>
+### gc16 の起動時設定  
+
 gc16 は設定で router として起動させることができる  
 
 1. gc16 を shutdown  

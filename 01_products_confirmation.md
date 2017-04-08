@@ -33,9 +33,9 @@ Micro USB や GPIO を通じて 5V の電力を供給すると起動する
 
   3. それらをスピーカーから合成音声で読み上げる
 
-<a name="setdatetime>
+<a name="setdatetime"/>
 ### 時刻の設定
-</a>
+
 
 slider の Web アプリケーションを使って PC の時刻で Raspberr Pi の時刻を合わせる
 
@@ -48,6 +48,7 @@ IPアドレスは[こちら](classenvironment.md)で確認できる。以下の�
 
 3. (任意：時刻が同期される理由の確認) chrome の「検証」を開き、Source タブで "dt.php" のコードを開く。このコードは Ajax でクライアントの時刻をサーバに POST している。
 
+<a name="monitor"/>
 ### サーバの確認
 1. PC で chrome を開き、IP アドレスを指定して自分の Raspberry Pi が所属するネットワークのサーバーに接続する。サーバーの IP アドレスは[こちら](classenvironment.md)で確認できる。以下の画面になる  
 
