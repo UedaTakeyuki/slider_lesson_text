@@ -1,6 +1,8 @@
 # Introduction
 
-このドキュメントは講座 `IoT基礎` の実習テキストです。`IoT基礎` では、Raspberry Pi と、Atelier UEDA が著作権をもつアプリケーション [slider](https://github.com/UedaTakeyuki/slider)、[monitor](https://github.com/UedaTakeyuki/monitor)、[BackupPi_2](https://github.com/UedaTakeyuki/BackupPi_2)、などのオープンソースのプロダクトを利用して IoT システムの仕組みを理解するとともに Raspberry Pi をつかって情報システムのプロトタイプを作るためのノウハウを学びます  
+このドキュメントは IoT の基礎を学ぶための実習例題集です。
+Raspberry Pi、安価なセンサや表示デバイス、Raspberry Pi 上のアプリケーションソフトウェア [slider](https://github.com/UedaTakeyuki/slider)、[monitor](https://github.com/UedaTakeyuki/monitor)、[BackupPi_2](https://github.com/UedaTakeyuki/BackupPi_2)、などを使って
+IoT システムの仕組みを理解するとともに、IoT にとどまらず Raspberry Pi をつかったいろいろな情報システムのプロトタイプを安価かつ迅速に作るためのノウハウを体験します  
 
 
 
