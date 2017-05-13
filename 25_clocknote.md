@@ -11,8 +11,8 @@ LCD 表示と読み上げをコントロールしている clocknote の実装�
 ##<u>実習手順</u>
 自身の gc16 に terminal でログインする
 
-### clocknote の捜査
-サービスは systemctl コマンドで捜査する
+### clocknote の操作
+サービスは systemctl コマンドで操作する
 
 1. clocknote の停止
 ```

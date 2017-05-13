@@ -7,11 +7,11 @@ IoT 端末の要件はデータを取得してデータを処理する事で、�
 自身の gc16 に terminal でログインする
 
 ### 設定ファイル
-設定ファイルには .ini ファイル、.yaml ファイル、.toml ファイルなどや、json, xml などが可能  
-以下、.ini ファイルの例と .toml ファイルの例を占めす
+設定ファイルには .ini ファイル、.yaml ファイル、.toml ファイルなどの他に、json, xml なども可能  
+以下、.ini ファイルの例と .toml ファイルの例を説明する
 
 #### .ini ファイル
-配列やハッシュのようなデータ構造が不要で key=value の組でよければ .ini ファイルでもよい  
+配列やハッシュのようなデータ構造が不要で単に key=value の組でよければ .ini ファイルでもよい  
 bash からも、python からも利用可能
 
 ##### bash からの利用
@@ -23,11 +23,13 @@ pi@gc1624:~ $ cd /boot
 ```
 
 2. $network になにも設定されていない事を確認
+
 ```
 pi@gc1624:/boot $ echo $network
 
 ```
-3. gc.ini を表示  
+3. gc.ini を表示
+
 ```
 pi@gc1624:/boot $ cat gc.ini
 #network=pi
@@ -49,8 +51,10 @@ wpa
 ```
 
 ##### bash からの利用、別の方法
-source は . とも書ける
-1. もう一つ、bash を立ち上げる。ここでは $network は設定されていない  
+source は . とも書ける  
+
+1. もう一つ、bash を立ち上げる。ここでは $network は設定されていない
+
 ```
 pi@gc1624:/boot $ bash
 pi@gc1624:/boot $ echo $network
@@ -65,14 +69,14 @@ wpa
 ```
 
 ##### python からの利用
-ConfigParser モジュールを利用して python から ini ファイルを参照できる
+ConfigParser モジュールを利用して python から ini ファイルを参照できる  
 
 1. `SCRIPT/slider` に移動
 ```
 pi@gc1624:~ $ cd SCRIPT/slider/
 ```
-
 2. `gen_saver.ini` の内容を確認
+
 ```
 pi@gc1624:~/SCRIPT/slider $ cat gen_saver.ini
 [save]
@@ -82,7 +86,6 @@ data_path=/boot/DATA
 [log]
 log_file=/home/pi/LOG/gen_saver.log
 ```
-
 3. インタラクティブモードで python を起動
 ```
 pi@gc1624:~/SCRIPT/slider $ python
@@ -90,25 +93,21 @@ Python 2.7.9 (default, Sep 17 2016, 20:26:04)
 [GCC 4.9.2] on linux2
 Type "help", "copyright", "credits" or "license" for more information.
 ```
-
 4. ConfitParser を import
 ```
 >>> import ConfigParser
 ```
-
 5. ConfigParser のインスタンスをつくり、.ini ファイルを読む
 ```
 >>> ini = ConfigParser.SafeConfigParser()
 >>> ini.read("gen_saver.ini")
 ['gen_saver.ini']
 ```
-
 6. セクションとアイテムを指定して get
 ```
 >>> ini.get("save","data_path")
 '/boot/DATA'
 ```
-
 7. exit で終了
 ```
 >>> exit()
@@ -182,6 +181,7 @@ import pytoml as toml
 ```
 
 4. python の dict データとして config を参照
+
 ```
 >>> config
 {u'sensors': {u'dht22': {u'data': [[u'temp', u'\u2103', u'gen_sender', u'gen_saver'], [u'humidity', u'%', u'gen_sender', u'gen_saver'], [u'humiditydeficit', u'g/\u33a5', u'gen_sender', u'gen_saver']]}}, u'imaging': {u'uvc': {u'data': [u'pic', u'all', u'gen_pic_sender', u'gen_pic_saver']}}}

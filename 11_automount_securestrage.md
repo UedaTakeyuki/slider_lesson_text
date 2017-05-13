@@ -2,16 +2,16 @@
 
 ##<u>概要</u>
 `/` にマウントされるストレージは`/etc/fstab`によって起動時にマウントされるストレージの他に、USB に新たにストレージが装着されたことを認識して自動的にマウントする `auto mount`がある  
-また、セキュアストレージの復号化とマウントを静的におこなってしまうと、その定義ファイルからストレージの暗号鍵がわかってしまうので、それをさけるために`手動でマウント`する方法もある
+他に、セキュアストレージの復号化とマウントを静的におこなってしまうと、その定義ファイルからストレージの暗号鍵がわかってしまうので、それをさけるために`手動でマウント`する方法もある
 
 gc15 と gc16 では、auto mount のマウント先が異なる。gc15 が利用するデスクトップタイプの Raspbian Jessie と gc16 が利用するコマンドラインベースの Raspbian Jessie Lite では auto mount の方法が異なるからである
 
 ##<u>実習手順</u>
 
 ### gc16 の auto mount
-SD カード R/W を Raspberry Pi の USB ポートに装着 ***せずに***、自身の gc16 に terminal でログインする
+SD カード R/W を Raspberry Pi の USB ポートに装着 ***せずに***、自身の ***gc16*** に terminal でログインする
 
-1.
+1.`lsusb` コマンドで USB に接続された機器の一覧を見る
 ```
 pi@gc1624:~ $ lsusb
 Bus 001 Device 005: ID 056e:7007 Elecom Co., Ltd
@@ -19,8 +19,9 @@ Bus 001 Device 003: ID 0424:ec00 Standard Microsystems Corp. SMSC9512/9514 Fast 
 Bus 001 Device 002: ID 0424:9514 Standard Microsystems Corp.
 Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 ```
+当たり前なのだがストレージらしいデバイスは接続あれていない
 
-2.
+2.`df` コマンドでシステムにマウントされているデバイスを確認する
 ```
 pi@gc1624:~ $ df
 Filesystem     1K-blocks    Used Available Use% Mounted on
@@ -35,27 +36,29 @@ tmpfs             473868       0    473868   0% /sys/fs/cgroup
 /dev/mapper/i4    247791  103988    126703  46% /var/www/html/SCRIPT
 ```
 
-3.
+3.ルート配下のフォルダを確認
 ```
 pi@gc1624:~ $ ls /
 bin   dev  home  lost+found  mnt  proc  run   srv  tmp  var
 boot  etc  lib   media       opt  root  sbin  sys  usr
 ```
 
-4.
+4.`/media` 配下のフォルダを確認
 ```
 pi@gc1624:~ $ ls /media
 usb  usb0  usb1  usb2  usb3  usb4  usb5  usb6  usb7
 ```
 
-5.
+5.`usb0, usb1 とも中身は空`
 ```
 pi@gc1624:~ $ ls /media/usb0
 pi@gc1624:~ $ ls /media/usb1
 pi@gc1624:~ $
 ```
 
-6.
+次に、Jessie Lite の SDカードの入った R/W を Raspberry Pi の USB ポートに装着 ***する***
+
+6.`lsusb` コマンドで USB に接続された機器の一覧を見る
 ```
 pi@gc1624:~ $ lsusb
 Bus 001 Device 006: ID 0bda:0109 Realtek Semiconductor Corp.
@@ -64,8 +67,9 @@ Bus 001 Device 003: ID 0424:ec00 Standard Microsystems Corp. SMSC9512/9514 Fast 
 Bus 001 Device 002: ID 0424:9514 Standard Microsystems Corp.
 Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 ```
+Realtek のデバイスが増えている
 
-7.
+7.`df` コマンドでシステムにマウントされているデバイスを確認する
 ```
 pi@gc1624:~ $ df
 Filesystem     1K-blocks    Used Available Use% Mounted on
@@ -81,7 +85,9 @@ tmpfs             473868       0    473868   0% /sys/fs/cgroup
 /dev/sda1          63503   20725     42778  33% /media/usb0
 /dev/sda2        1814528  863108    850988  51% /media/usb1
 ```
-8.
+`/media/usb0` と `/media/usb1` が増えている
+
+8.`usb0`,`usb1`それぞれの中身を確認する
 ```
 pi@gc1624:~ $ ls /media
 usb  usb0  usb1  usb2  usb3  usb4  usb5  usb6  usb7
@@ -99,9 +105,9 @@ boot  etc  lib   media       opt  root  sbin  sys  usr
 ```
 
 ### gc15 の auto mount
-R/W を Raspberry Pi の USB ポートに装着 ***せずに***、自身の gc16 に terminal でログインする
+SD カード R/W  を Raspberry Pi の USB ポートに装着 ***せずに***、自身の ***gc15*** に terminal でログインする
 
-1.
+1.`/media` フォルダの下を確認
 ```
 pi@gc1524:/var/www/html $ ls /media
 pi
@@ -119,11 +125,12 @@ pi@gc1524:~ $ sudo ls /media/pi/158717B0012C7F83/
 pi@gc1524:~ $
 ```
 
-2.
+2.同様に、Jessie Lite の SDカードの入った R/W を Raspberry Pi の USB ポートに装着 ***して***、自身の ***gc15*** に terminal でログインする
 ```
 pi@gc1524:~ $ sudo ls /media/pi/
 158717B0012C7F83  adc806ed-d763-4eab-8319-b7ecfb276845	boot
 ```
+`adc806ed-d763-4eab-8319-b7ecfb276845`と`boot`が増えている
 
 ```
 pi@gc1524:~ $ sudo ls /media/pi/158717B0012C7F83/
@@ -186,15 +193,17 @@ tmpfs              94776       0     94776   0% /run/user/1000
 /dev/sda1        3507840  419320   3088520  12% /media/pi/boot
 /dev/sda2        3404364 2662576    580156  83% /media/pi/3598ef8e-09be-47ef-9d01-f24cf61dff1d
 ```
+gc15の暗号化ファイルシステムは gc15の起動時に復号化されて`/home/pi/SCRIPT`と`/var/www/html/SCRIPT`にマウントされる  
+外付け SD カードの gc16 の暗号化ファイルシステムは、USB に装着してもマウントされ ***ない***
 
-5.
+5.外付けSD カードの gc16 の`/`配下の
 ```
 pi@gc1524:~ $ ls /media/pi/3598ef8e-09be-47ef-9d01-f24cf61dff1d
 bin   dev  home  lost+found  mnt  proc  run   srv  tmp  var
 boot  etc  lib   media       opt  root  sbin  sys  usr
 ```
 
-6.
+6.`/home/pi`配下の
 ```
 pi@gc1524:~ $ ls /media/pi/3598ef8e-09be-47ef-9d01-f24cf61dff1d/home/pi
 2013-10-27 13.36.31.jpg  haarcascade_frontalface_default.xml  SCRIPT
@@ -206,7 +215,8 @@ facemosaic.py            mosaic.jpg
 gc_ssd1306.pyc           old
 ```
 
-7.
+7.`SCRIPT`を見ても
 ```
 pi@gc1524:~ $ ls /media/pi/3598ef8e-09be-47ef-9d01-f24cf61dff1d/home/pi/SCRIPT/
 ```
+実行時とは違い、何もマウントされていない

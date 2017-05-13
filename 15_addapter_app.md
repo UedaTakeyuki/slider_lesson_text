@@ -24,7 +24,8 @@ cat -n /home/pi/SCRIPT/slider/vendor/dht22.setup.sh
 ```
 crontab -e
 ```  
-末尾で read.py を 1分毎に起動するようにしているのでここを変更する  
+末尾で read.py を 1分毎に起動するようにしているのでここを変更する
+
 ```
 この行を　↓
 */1 * * * * sudo python /home/pi/SCRIPT/slider/read.py
@@ -207,7 +208,8 @@ pi@gc1624:~/SCRIPT/slider $ cd
 pi@gc1624:~ $ cd SCRIPT/slider/
 pi@gc1624:~/SCRIPT/slider $ nano cpu.py
 ```  
-内容は以下  
+内容は以下
+
 ```
 import subprocess
 import re
@@ -224,7 +226,8 @@ def read():
 if __name__ == '__main__':
   value = read()
 ```  
-同じ物が cpu_shell.py に用意してあるのでコピーしても良い  
+同じ物が cpu_shell.py に用意してあるのでコピーしても良い
+
 ```
 pi@gc1624:~/SCRIPT/slider $ cp cpu_shell.py cpu.py
 ```

@@ -7,7 +7,7 @@ GPIOの操作について習得する。Linux では gpio は /sys から shell 
 自身の gc16 に terminal でログインする
 
 ### gpio readall
-順番が sysfs と前後してしまう（sysfs のほうが原理的）のだが、便利なツールなので最初に紹介する。Wiring Pi をインストールすると、 shell で使う utility `gpio` コマンドが利用できる。  
+順番が sysfs と前後してしまう（sysfs のほうが原理的）のだが、便利なツールなので最初に紹介する。Wiring Pi をインストールすると一緒に幾つかの utility がインストーされ、`gpio` コマンドが利用できるようになる。  
 `gpio` コマンドの `readall` オプションで、現在の gpio の全ての状態が表示される
 
 ```
@@ -42,12 +42,12 @@ pi@gc1624:~ $ gpio readall
 
 最下行に RPi のボードのバージョンが表示され、その上は各ピンの ***名前*** と ***モード*** と ***値*** が表示されている
 
-値は `V` 欄に 0 か 1 かで示されている  
+値は `V` 欄に 0 か 1 かで表示されている  
 
 次に `Mode` だが、GPIO は、***インプットモード***、***アウトプットモード***、***altinative function mode*** のモードを持つ  
 
 ***インプットモード*** は、接続先の状態を受け入れるモードで、接続先が 0 になれば gpio も 0になる  
-***アウトプットモード*** は、接続先の状態を変化させるモードで、gpio が 0 になればつながった先も 0 になる
+***アウトプットモード*** は、接続先の状態を変化させるモードで、gpio が 0 になればつながった先も 0 になる  
 ***アルタナティブファンクションモード*** は、gpio を単に接点の on/off に使うのではなく、別の機能（後に説明する i2c や SPI等）に割り当てているモードで、複数個の alt モードのアサインが可能なので `alt0` や `alt1` などと区別する。
 
 混乱しているのが名前で、`BCM`、`wPi`、`Name`、`Physical` の ***４種類の名前*** が並記されている
@@ -56,13 +56,13 @@ pi@gc1624:~ $ gpio readall
 
 `Name` は、Raspberry Pi の GPIO番号か、もしくは ALT0モードの機能名
 
-`wPi` は Raspberry Pi の GPIO番号と整合する GPIO 番号
+`wPi` は Raspberry Pi の GPIO番号と整合する GPIO 番号  
 `BCM` は Broadcom2835内部の GPIO番号（後に説明する `/sys` に export する番号）  
 
 ### sysfs からの利用
 Wiring Pi 等のライブラリがなにもインストールされていない Raspberry Pi であっても `/sys/class/gpio` を操作することで GPIO の読み書きは可能
 
-1. まず、他で使っていない場合、下記のように　gpio フォルダ
+1. gpio を/sys経由で使っていない場合、gpio フォルダは下記のようになっている
 ```
 pi@gc1624:~ $ ls /sys/class/gpio
 export  gpiochip0  gpiochip100  unexport
@@ -72,7 +72,6 @@ export  gpiochip0  gpiochip100  unexport
 ```
 pi@gc1624:~ $ echo 27 > /sys/class/gpio/export
 ```
-
 すると、27 が以下のように /sys/call/gpio に export される
 ```
 pi@gc1624:~ $ ls /sys/class/gpio
@@ -247,7 +246,7 @@ pi@gc1624:~ $ gpio readall
   +-----+-----+---------+------+---+---Pi 3---+---+------+---------+-----+-----+
 </code></pre>
 
-2. GPIO.27 が 0 から 1 に変化すると "water" と表示するように設定
+2. コンソールで下記コマンドを実行すると、GPIO.27 が 0 から 1 に変化すると "water" と表示する
 ```
 pi@gc1624:~ $ gpio wfi 27 rising; echo water!
 ```
@@ -554,7 +553,7 @@ pi@gc1624:~/SCRIPT/slider $ cat -n if_gpio_rpi3_pp.py
 2. 温湿度センサーを確認する  
 温湿度センサーの break out 基盤のマーク`+`の Pin が 3.3V電源、`-`の Pin が GND、`out` の Pin が Data
 
-<img src="pic/ss.2017-03-23 17.59.11.png" width="75%">
+<img src="pic/ss.2017-03-23 17.59.11.png" width="30%">
 
 それぞれ、以下のように接続されている
 

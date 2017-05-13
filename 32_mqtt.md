@@ -6,7 +6,7 @@ IoT に適したプロトコルとして脚光を浴びている MQTT プロト�
 ##<u>実習手順</u>
 自身の gc16 に terminal でログインする
 
-1. トポロジの理解: mqtt はブローカーを介してメッセージ・キューのような pub & sub 型のトポロジとなる  
+1. トポロジの理解: mqtt のトポロジはブローカーを介してメッセージ・キューのような pub & sub 型になる  
 <img src="mermaid/flowchart01.png" width="75%">  
 IoT クライアントは取得したデータを publisher として Broker に通知する  
 Broker は subscriver にデータを通知する

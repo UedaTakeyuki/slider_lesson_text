@@ -39,8 +39,9 @@ PSK:  raspberry
 |gc1619|173.24.1.69|client|
 
 ##MANETの実習
-26章 `MANET` で設定する `adhoc_address` の表
-gc16router と gc16router2 NIC を二つもち、一つは下の表の通りの adhoc_address で MANET に参加し、もう一つは上の表のとおりそれぞれ `172.24.1.1`,`173.24.1.1`でルーター機能をPCに提供する  
+26章 `MANET` で設定する `adhoc_address` は以下  
+
+この環境で router は `gc16router` と `gc16router2` の２つの NIC をもち、一つは下の表の通り `174.24.1.1` で MANET に参加し、もう一つは上の表のとおりそれぞれ `172.24.1.1`,`173.24.1.1`でルーター機能をPCに提供する  
 ルーターは両方のネットワークに所属しているので、各自はPCからまず router にログインし、そこから ssh で自分の Raspberry Pi に addhoc_address でログインできる
 
 |ホスト名|adhoc_address|

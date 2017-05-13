@@ -1,8 +1,8 @@
 # Introduction
 
-このドキュメントは IoT の基礎を学ぶための実習例題集です。
-Raspberry Pi、安価なセンサや表示デバイス、Raspberry Pi 上のアプリケーションソフトウェア [slider](https://github.com/UedaTakeyuki/slider)、[monitor](https://github.com/UedaTakeyuki/monitor)、[BackupPi_2](https://github.com/UedaTakeyuki/BackupPi_2)、などを使って
-IoT システムの仕組みを理解するとともに、IoT にとどまらず Raspberry Pi をつかったいろいろな情報システムのプロトタイプを安価かつ迅速に作るためのノウハウを体験します  
+このドキュメントは IoT の基礎を学ぶための実習例題集です  
+Raspberry Pi、安価なセンサや表示デバイス、及び Raspberry Pi 上のアプリケーションソフトウェア [slider](https://github.com/UedaTakeyuki/slider)、[monitor](https://github.com/UedaTakeyuki/monitor)、[BackupPi_2](https://github.com/UedaTakeyuki/BackupPi_2)、等を使って
+IoT システムの仕組みを理解し、並びに IoT にとどまらず Raspberry Pi をつかったいろいろな情報システムのプロトタイプを安価かつ迅速に作るためのノウハウを提供します 
 
 
 
@@ -35,4 +35,5 @@ cd slider_lesson_text
 make
 ```
 
-このドキュメントは[源真ゴシック](http://jikasei.me/font/genshin/) を利用させていただき、体裁を確認させていただきました。[こちらの手順](http://backport.net/blog/2016/09/06/pdf_embedded_japanese_font/)を参照させていただき、[cloud9](https://c9.io)に源真ゴシックをインストールして pdf を作成しました
+このドキュメントは[源真ゴシック](http://jikasei.me/font/genshin/) を利用させていただき、体裁を確認させていただきました  
+[こちらの手順](http://backport.net/blog/2016/09/06/pdf_embedded_japanese_font/)を参照させていただき、[cloud9](https://c9.io)に源真ゴシックをインストールして pdf を作成しました

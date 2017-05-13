@@ -123,7 +123,7 @@ pi@gc1624:/var/www/html/SCRIPT/say $ cat openjtalk.setup.sh
 ```
 
 ### espeak（任意）
-open-jtalk は`日本語`以外の言語では espeak が多言語に対応しており、英語だけで6方言、アフリカーンス、ボスニア語、フランス語、デンマーク語、ギリシャ語、クルド語、ラトビア語、タミル語など多くの言語に対応した言語定義ファイルと音響ファイルが用意されている  
+日本語以外の言語では ***espeak*** が多言語に対応しており、英語だけで6方言、アフリカーンス、ボスニア語、フランス語、デンマーク語、ギリシャ語、クルド語、ラトビア語、タミル語など多くの言語に対応した言語定義ファイルと音響ファイルが用意されている  
 以下、espeak で中国語を喋らせる
 
 1. config.ini ファイルを編集して command_path を espeak.zh.sh に変更する  
@@ -150,7 +150,7 @@ pi@gc1624:/var/www/html/SCRIPT/say $ cat espeak.setup.sh
 
 ### AquesTalkPi の利用(任意)
 AquesTalk は高速な音声合成、極めて自然な発話ができる等の多くの利点を持つ商用の日本語音声合成エンジンで、TV放送などいろいろな場所でつかわれている  
-Raspberry Pi 用の`おためし版`AquesTalkPi が公開されていて非商用目的に利用できる他、ライセンスを購入して商用利用することも可能
+Raspberry Pi 用の ***おためし版*** AquesTalkPi が公開されていて非商用目的に利用できる他、ライセンスを購入して商用利用することも可能
 
 1. config.ini ファイルを編集して command_path を AquesTalkPi に変更する  
 以下は修正例

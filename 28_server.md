@@ -1,7 +1,7 @@
 # 28.Raspberry Pi で Server を作成
 
 ##<u>概要</u>
-Raspberry Pi の CPU は Server として十分な能力を持っており、実際、フランスの scaleway  のように ARM v7 CORE の CPU でべアメタルのサーバを提供するサービスもにぎわっている  
+Raspberry Pi の CPU は Server として十分な能力を持っており、実際、フランスの scaleway  のように ARM v7 CORE の CPU でべアメタルのサーバを提供するサービスも存在する  
 以下、Raspberry Pi をサーバとして利用するための設定を説明する
 
 ##<u>実習手順</u>
@@ -53,11 +53,11 @@ sshd      13559        root    3u  IPv4  46909      0t0  TCP gc1624:ssh->172.24.
 sshd      13565          pi    3u  IPv4  46909      0t0  TCP gc1624:ssh->172.24.1.1:60022 (ESTABLISHED)
 python    20361        root    3u  IPv4 158640      0t0  TCP localhost:50266->localhost:6379 (ESTABLISHED)
 ```  
-例えば、上のような場合、Server として `shellinabox`、 `xrdp`、 `nginx`、 `mosquitto` が Server として動いている。shellinabox と xrdp は既に説明したとおり Web ベースの shell と linux 用の Remote Desktop Service である
+例えば、上のような場合、`shellinabox`、 `xrdp`、 `nginx`、 `mosquitto` が Server として動いている。shellinabox と xrdp は既に説明したとおり Web ベースの shell と linux 用の Remote Desktop Service である
 nginx はこれから説明する Web Server、mosquitto は後に説明する MQTT Broker である
 
 ### Web Server
-gc16 は Web Server として nginx（エンジンエックス、と発音する）を使って、すでにみてきたように以下の Web インターフェースを提供している  
+gc16 は Web Server として nginx（エンジンエックス、と読む）を使って、すでに見てきたような以下の Web インターフェースを提供している  
 <img src="pic/ss.2017-03-08 21.01.34.png" width="75%">
 
 1. nginx のインストールスクリプトは以下

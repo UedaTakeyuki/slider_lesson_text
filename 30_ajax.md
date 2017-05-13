@@ -13,6 +13,7 @@ pi@gc1624:~ $ cd /var/www/html/gpio
 ```
 
 2. テキストエディタで ajax.php を以下の内容で作成する
+
 ```
 <?php
 if(isset($_GET['gpio'])) {
@@ -38,11 +39,12 @@ exit;
 
 3. ブラウザで確認  
 URL は`自分の RPi のホスト名/gpio/ajax.php`  
-<img src="pic/sss.2017-04-05 16.05.59.png" width="75%">  
+<img src="pic/ss.2017-04-05 16.05.59.png" width="90%">  
 また、`?gpio=`のパラメタを指定して、特定の gpio の値のみ受け取ることもできる
-<img src="pic/ss.2017-04-05 16.09.53.png" width="75%">  
+<img src="pic/ss.2017-04-05 16.09.53.png" width="90%">  
 
 4. gc16 の terminal から curl と jq を使って接続する
+
 ```
 pi@gc1624:/var/www/html/gpio $ curl localhost/gpio/ajax.php?gpio=2
 {"gpio_2":"0"}

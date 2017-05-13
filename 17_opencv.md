@@ -218,7 +218,7 @@ get face
 
 3. 顔が認識できていれば /boot/DATA に mosaic.jpg というファイルができている。RPi をshutdown して SD カードを RPi から抜き USB SD reader/writer で PC に挿し、PC で開く
 
-4. SD カードを RPi に戻し、facedetect のコードを参照  
+4. SD カードを RPi に戻し、facepixelate のコードを参照  
 ```
 pi@gc1624:~ $ cat -n /home/pi/SCRIPT/cv/facepixelate.py
      1	#coding:utf-8

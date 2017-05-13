@@ -7,7 +7,7 @@
 自身の gc16 に terminal でログインする
 
 ### 準備
-Bootstrap, jQuerry, jQuery-mobile 等の javascript ライブラリは通常だと `npm` コマンドでインストールするのだが、教室の環境は外部ネットワークにつながっていないので、既にインストール済みの別の Web アプリケーションの node_modules をコピーする
+Bootstrap, jQuerry, jQuery-mobile 等の javascript ライブラリは通常 `npm` 等でインストールするのだが、教室の環境は外部ネットワークにつながっていないので、既にインストール済みの別の Web アプリケーションの node_modules をコピーする
 
 1. `/var/www/html/gpio/` に移動  
 ```
@@ -103,7 +103,7 @@ pi@gc1624:/var/www/html/gpio $ npm list
 23	</html>
 ```  
 
-### スマフォ風の UI に
+### スマフォ風の UI
 1. jQuery mobile でヘッダとフッタを付ける  
 下記のように 17 - 23行目、25 - 33行目を挿入して、jQuery-mobile のページ構成にする
 
@@ -147,7 +147,7 @@ pi@gc1624:/var/www/html/gpio $ npm list
 下記のような表示になる  
 <img src="pic/ss.2017-04-05 18.36.34.png" width="75%">  
 
-2. レスポンシブデザイン
+2. レスポンシブデザイン  
 mobile first でレスポンシブな表示にするために BootStrap のグリッドシステムを使う  
 24行、33行の `<class="row">` class と 28行、30行の `<class="col-xx-xx">` を追加した  
 ```

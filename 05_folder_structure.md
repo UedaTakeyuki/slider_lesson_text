@@ -1,7 +1,7 @@
 # 5.基本的な Folder Structure
 
 ##<u>概要</u>
-Raspberry Pi の OS (Raspbian) の基本的なフォルダストラクチャを確認しておく
+Raspberry Pi の OS (Raspbian) の基本的なフォルダ構成を確認しておく
 
 ##<u>実習手順</u>
 自身の gc16 に terminal でログインする
@@ -55,7 +55,7 @@ pi@gc1624:~ $ df
 ```
 
 `/boot` の実体は `/dev/mmcblk0p1`。この意味も３章で説明する  
-/boot フォルダは 3.5G Byte と、8G Byte SD カードの半分をしめている。これは４章で説明するように gc15, gc16 で拡張しているからであり、通常の素の raspbian では 60M Byte 程度である
+/boot フォルダは 3.5G Byte と、8G Byte SD カードの半分をしめている。４章で説明するように gc15, gc16 では利便性のために /boot のサイズを拡張しているからであり、通常の素の raspbian では 60M Byte 程度である
 
 `/` と `/boot` のマウントの定義は `/etc/fstab` にある
 ```
@@ -92,7 +92,8 @@ pi@gc1624:~ $ ls -l /home
 ```
 
 ### sys フォルダ
-sysfs, kernel のデータを user land に export する仮想ファイルシステム
+sysfs  
+kernel のデータを user land に export する仮想ファイルシステム
 ```
 pi@gc1624:~ $ ls -l /sys
 ```
