@@ -108,8 +108,9 @@ Type "help", "copyright", "credits" or "license" for more information.
 上記の手続きをプログラムファイルに実装する。処理は、SOSを繰り返し発信するようにする。
 
 2. `nano morse_code.py` で（vi使いの方は vim でもいいです）エディタを開き、下記のように編集して保存
-する  
-```
+する
+
+<pre>
 import led
 import time
 l = led.LED()
@@ -121,9 +122,10 @@ while True:
   time.sleep(1)
   l.S(0)
   time.sleep(3)
-```
+</pre>
 
 3. morse_code.py を実行する  
+
 ```
 pi@gc1624:~ $ python morse_code.py
   File "morse_code.py", line 7
