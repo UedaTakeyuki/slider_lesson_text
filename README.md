@@ -37,3 +37,7 @@ make
 
 このドキュメントは[源真ゴシック](http://jikasei.me/font/genshin/) を利用させていただき、体裁を確認させていただきました  
 [こちらの手順](http://backport.net/blog/2016/09/06/pdf_embedded_japanese_font/)を参照させていただき、[cloud9](https://c9.io)に源真ゴシックをインストールして pdf を作成しました
+
+## From where can I download the PDF.
+
+上記、ビルド済 PDF の release version は[こちら](https://github.com/UedaTakeyuki/slider_lesson_text/releases)からダウンロードが可能です
