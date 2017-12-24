@@ -1,9 +1,9 @@
 # 5.基本的な Folder Structure
 
-##<u>概要</u>
+## <u>概要</u>
 Raspberry Pi の OS (Raspbian) の基本的なフォルダ構成を確認しておく
 
-##<u>実習手順</u>
+## <u>実習手順</u>
 自身の gc16 に terminal でログインする
 
 ### ディレクトリの移動 と一覧の表示
