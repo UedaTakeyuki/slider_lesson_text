@@ -1,9 +1,9 @@
 # 6.設定メニュー
 
-##<u>概要</u>
+## <u>概要</u>
 設定メニューの項目と操作方法を CUI、GUI の両者について理解する
 
-##<u> CUI 実習手順</u>
+## <u> CUI 実習手順</u>
 自身の gc16 に terminal でログインする
 
 ### raspi-config
@@ -36,7 +36,7 @@ Linux なので個々の設定は原理的に設定ファイルの編集で行�
 メモリを CPU/GPU でどのようにわけるか  
 後で利用する I2Cの有効/無効（起動時にI2Cのドライバをロードするかどうか）などの設定メニューがある  
 
-##<u> GUI 実習手順</u>
+## <u> GUI 実習手順</u>
 自身の gc15 に RemoteDesktop でログインする
 
 1. [Raspberry メニュー] - [Preferences] - [Raspberry Pi Configration] を開く  
