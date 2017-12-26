@@ -1,9 +1,9 @@
 # 7.Raspberry Pi のプログラミング
 
-##<u>目標</u>
+## <u>目標</u>
 bash と python のコーディングと実行を経験する  
 
-##<u>実習手順</u>
+## <u>実習手順</u>
 自身の gc16 に terminal でログインする
 
 ### Raspberry led の乗っ取り
