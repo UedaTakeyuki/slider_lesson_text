@@ -3,7 +3,7 @@
 先の実習でおこなったバックアップ＆リストアだが、Web UI をかぶせて Web から操作できるようにしておくと本当に便利になる。この Web UI は BackupPi として[こちら](https://github.com/UedaTakeyuki/BackupPi_2)にコードを、[こちら](http://qiita.com/UedaTakeyuki/items/4a78c38b3070e8ef57e5)に記事を公開している  
 このぐらい気楽にバックアップがとれるようになると、開発作業中に頻繁にバックアップをとるようになる  
 
-##< u>実習手順</u>
+## <u>実習手順</u>
 gc16 で RPi を起動  
 外付け SDカード reader/writer をつかって jl の SDカードを RPi の USB に装着する  
 
