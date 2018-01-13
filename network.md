@@ -33,7 +33,7 @@ login すると、以下のようなデスクトップが開く
 1. GUI操作用の ***gc16*** の SD カードで Raspberry Pi を起動する
 2. PC で RemoteDesktop を開きく、上で調べた IP アドレスで自分の Raspberry Pi に接続
 3. 下記のように login 画面が開く
-<img src="pic/ss.2016-12-16 14.44.02.png" width="75%">
+<img src="pic/ss.2016-12-16 14.44.02.png" width="75%">  
 login id と password は以下
 
   - ID: pi
