@@ -201,7 +201,7 @@ mobile first でレスポンシブな表示にするために BootStrap のグ�
 <img src="pic/ss.2017-04-05 18.39.40.png" width="75%">  
 
 3. 静的な文字列は静的なままに
-上のコードで、28行と30行は、dom の静的な要素であったはずの <div> を echo で動的に生成している  
+上のコードで、28行と30行は、dom の静的な要素であったはずの `<div>` を echo で動的に生成している  
 最終的にできあがる HTML はかわらないのだが静的なものは静的にしておきたいので、下記のように変更することができる  
 29行と31行は php の for loop によって繰り返し生成される  
 ```
@@ -252,7 +252,7 @@ mobile first でレスポンシブな表示にするために BootStrap のグ�
 45	</html>
 ```
 
-4. 制御構造に関する別の構文(Alternative syntax for control structures)
+4. 制御構造に関する別の構文(Alternative syntax for control structures)  
 php のブロック `{` と html のタグ `<` がまじって構造が見にくくくなることを避けるために  
 `別の構文`で書き換えるとかなりリーダブルなコードになる
 ```
