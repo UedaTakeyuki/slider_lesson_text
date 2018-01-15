@@ -177,7 +177,8 @@ pi@gc1624:~ $ ls /var/www/html/SCRIPT/
 BackupPi_2  gcidx  lost+found  monitor  say  sdt
 ```
 
-4. html の作成  
+### Web アプリの作成
+1. Web ページの作成  
 実際に Web ページを作ってみる  
 まず、`/var/www/html` に移動し、`gpio` というフォルダを作成する  
 ```
@@ -263,7 +264,7 @@ pi@gc1624:/var/www/html/gpio $
 以下のように表示される  
 <img src="pic/ss.2017-04-04 22.21.26.png" width="75%">
 
-5. php スクリプトの作成  
+2. php スクリプトの作成  
 html ファイルは静的なファイルをそのまま表示するだけなのでユーザやシステムとのインタラクションを反映させることができない  
 そこで、先に作成した html ファイルをひな形として php スクリプトを作成する  
 
