@@ -1,6 +1,5 @@
-# 最新版の [MONITOR](https://monitor.uedasoft.com) をクラウドにご用意いたしましたのでこちらもご利用いただければ幸いです
-
 # Introduction
+# 最新版の [MONITOR](https://monitor.uedasoft.com) をクラウドにご用意いたしましたのでこちらもご利用いただければ幸いです
 
 このドキュメントは IoT の基礎を学ぶための実習例題集です  
 Raspberry Pi、安価なセンサや表示デバイス、及び Raspberry Pi 上のアプリケーションソフトウェア [slider](https://github.com/UedaTakeyuki/slider)、[monitor](https://github.com/UedaTakeyuki/monitor)、[BackupPi_2](https://github.com/UedaTakeyuki/BackupPi_2)、等を使って
