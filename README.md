@@ -1,3 +1,5 @@
+# 最新版の [MONITOR](https://monitor.uedasoft.com) をクラウドにご用意いたしましたのでこちらもご利用いただければ幸いです
+
 # Introduction
 
 このドキュメントは IoT の基礎を学ぶための実習例題集です  
