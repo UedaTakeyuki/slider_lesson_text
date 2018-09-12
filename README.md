@@ -1,4 +1,4 @@
-# 最新版の MONITOR を [こちら](https://monitor.uedasoft.com) にご用意いたしましたのでご利用いただければ幸いです
+# 最新版の MONITOR を service として[こちら](https://monitor.uedasoft.com) にご用意いたしましたのでご利用いただければ幸いです
 
 # Introduction
 
