@@ -104,7 +104,7 @@ pi@gc1624:~/SCRIPT/wvdial $ cat 2eth0.sh
 # routing from wlan0 to eth0, refer  http://akkagi.info/20160628_web/
 echo 1 > /proc/sys/net/ipv4/ip_forward
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
-iptables -A FORWARD -i eth0 -o wlan0 -m state --state RELATED,ESTABLISHED -j $
+iptables -A FORWARD -i eth0 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT
 iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
 ```  
 以下は ppp0 が外部につながっているとして、ppp0 へのフォーワーディングを許可させるスクリプト  
@@ -113,7 +113,7 @@ pi@gc1624:~/SCRIPT/wvdial $ cat 2ppp0.sh
 # routing from wlan0 to eth0, refer  http://akkagi.info/20160628_web/
 echo 1 > /proc/sys/net/ipv4/ip_forward
 iptables -t nat -A POSTROUTING -o ppp0 -j MASQUERADE
-iptables -A FORWARD -i ppp0 -o wlan0 -m state --state RELATED,ESTABLISHED -j $
+iptables -A FORWARD -i ppp0 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT
 iptables -A FORWARD -i wlan0 -o ppp0 -j ACCEPT
 ```
 
