@@ -1,10 +1,10 @@
 # 30.Ajax API の作り方
 
-##<u>概要</u>
+## <u>概要</u>
 ajax API はレスポンス文字列が HTML ではなく json 文字列であることを除けば通常の Web Server と同じであり、ajax API を作るための特別のミドルウェアは不要で php 等で普通に作成できる  
 例として、先ほど作成した gpio の一覧を返す Web Application の ajax 版を作成する
 
-##<u>実習手順</u>
+## <u>実習手順</u>
 自身の gc16 に terminal でログインする
 
 1. `/var/www/html/gpio` に移動
