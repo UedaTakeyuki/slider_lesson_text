@@ -1,10 +1,10 @@
 # 28.Raspberry Pi で Server を作成
 
-##<u>概要</u>
+## <u>概要</u>
 Raspberry Pi の CPU は Server として十分な能力を持っており、実際、フランスの scaleway  のように ARM v7 CORE の CPU でべアメタルのサーバを提供するサービスも存在する  
 以下、Raspberry Pi をサーバとして利用するための設定を説明する
 
-##<u>実習手順</u>
+## <u>実習手順</u>
 自身の gc16 に terminal でログインする
 
 ### 起動しているサーバの確認
